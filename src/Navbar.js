@@ -36,8 +36,8 @@ class Navbar extends Component {
 
   render() {
     const barcamps = this.state.barcamps.map(b => {
-      var date = b.date.split(/-|T/);
-      return  <option key={b.id} value={b.id}>{b.title + " " + date[2] + "/" + date[1]+ "/"+ date[0]}</option>
+      var event = new Date(b.date);
+      return  <option key={b.id} value={b.id}>{b.title} le {event.toLocaleDateString('fr-FR')}</option>
     })
     return(
       <div>

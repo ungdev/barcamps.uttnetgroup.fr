@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import Talk from './Talk.js'
 
-class Presentations extends Component {
+class DisplayTalks extends Component {
 
   constructor(props) {
     super(props);
@@ -13,8 +14,8 @@ class Presentations extends Component {
 
   render() {
     var talks = ""
-    if (!this.state.talks.length == 0) {
-      talks = this.state.talks.map(e => <h1 key={e.id}> {e.title} </h1>);
+    if (!this.state.talks.length === 0) {
+      talks = this.state.talks.map(e => <Talk talk={e}/>);
     }
     return (
       <div className="Presentations">
@@ -25,4 +26,4 @@ class Presentations extends Component {
 
 }
 
-export default Presentations;
+export default DisplayTalks;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar.js';
-import Presentations from './Presentations.js';
+import DisplayTalks from './DisplayTalks.js';
 import './App.css';
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
           <Navbar updateFilter={this.handleFilterUpdate.bind(this)}/>
         </div>
         <div className = 'Content'>
-          <Presentations talks = {this.state.talks}/>
+          <DisplayTalks talks = {this.state.talks}/>
         </div>
       </div>
     );
