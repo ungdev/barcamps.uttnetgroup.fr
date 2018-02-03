@@ -8,7 +8,7 @@ class Talk extends Component {
       talk: {},
       speaker: {},
       barcamp: {},
-      date: ''
+      date: ""
     }
   }
 
@@ -36,12 +36,14 @@ class Talk extends Component {
   }
 
   handleClick(type,event) {
+    var filter = []
     switch (type) {
       case "bar":
-        var filter = [this.state.talk.barcamp,"",""];
+        filter = [this.state.talk.barcamp,"",""];
         break;
       case "speaker":
-        var filter = ["",this.state.talk.speaker,""];
+        filter = ["",this.state.talk.speaker,""];
+        break;
       default:
     }
     this.props.updateFilter(filter)

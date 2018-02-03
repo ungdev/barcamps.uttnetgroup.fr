@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar.js';
 import DisplayTalks from './DisplayTalks.js';
+import Admin from './Admin.js';
 import './App.css';
 
 class App extends Component {
@@ -37,10 +38,11 @@ class App extends Component {
     return (
       <div>
         <div className = 'Sidebar'>
+          <Admin />
           <Navbar talks={this.state.talks} filter={this.state.filter} updateFilter={this.handleFilterUpdate.bind(this)}/>
         </div>
         <div className = 'Content'>
-          <DisplayTalks talks = {this.state.talks} updateFilter={this.handleFilterUpdate.bind(this)}/>
+          <DisplayTalks filter = {this.state.filter} talks = {this.state.talks} updateFilter={this.handleFilterUpdate.bind(this)}/>
         </div>
       </div>
     );
