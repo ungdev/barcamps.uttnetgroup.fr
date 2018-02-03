@@ -7,7 +7,10 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = {filter: [/\d*/,/.*/]};
+    this.state = {
+      filter: ["","",""],
+      talks: []
+    };
   }
 
   handleFilterUpdate(filterValue) {
@@ -23,11 +26,10 @@ class App extends Component {
     fetch('https://api.barcamps.uttnetgroup.fr/api/talk/?format=json')
       .then(result => result.json())
       .then(talks => {
-        console.log(talks);
-        talks = talks.filter(t => t.barcamp.toString().match(this.state.filter[0]) && t.title.match(this.state.filter[1]));
-        console.log(talks);
-        return talks;}
-      )
+        talks = talks.filter(t =>
+          t.barcamp.toString().match(this.state.filter[0]) && t.speaker.toString().match(this.state.filter[1]) && t.id.toString().match(this.state.filter[2]));
+        return talks;
+      })
       .then(talks => this.setState({talks}))
     }
 
@@ -35,10 +37,10 @@ class App extends Component {
     return (
       <div>
         <div className = 'Sidebar'>
-          <Navbar updateFilter={this.handleFilterUpdate.bind(this)}/>
+          <Navbar talks={this.state.talks} filter={this.state.filter} updateFilter={this.handleFilterUpdate.bind(this)}/>
         </div>
         <div className = 'Content'>
-          <DisplayTalks talks = {this.state.talks}/>
+          <DisplayTalks talks = {this.state.talks} updateFilter={this.handleFilterUpdate.bind(this)}/>
         </div>
       </div>
     );

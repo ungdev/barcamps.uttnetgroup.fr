@@ -35,11 +35,27 @@ class Talk extends Component {
     this.updateState(nextProps.talk);
   }
 
+  handleClick(type,event) {
+    switch (type) {
+      case "bar":
+        var filter = [this.state.talk.barcamp,"",""];
+        break;
+      case "speaker":
+        var filter = ["",this.state.talk.speaker,""];
+      default:
+    }
+    this.props.updateFilter(filter)
+  }
+
   render() {
     return(
       <div>
         <h1> {this.state.talk.title} </h1>
-        <p> {this.state.barcamp.title} par {this.state.speaker.firstname}  {this.state.speaker.lastname} le {this.state.date} </p>
+        <p>
+          <a className='Clickable' onClick={this.handleClick.bind(this,"bar")}> {this.state.barcamp.title} </a>
+          par <a className='Clickable' onClick={this.handleClick.bind(this,"speaker")}> {this.state.speaker.firstname} {this.state.speaker.lastname} </a>
+          le {this.state.date}
+        </p>
       </div>
     )
   }

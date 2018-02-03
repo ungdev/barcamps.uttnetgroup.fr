@@ -67,3 +67,8 @@ button {
   display: block;
   margin: auto;
 }
+
+a.Clickable {
+  cursor: pointer;
+  color: lightblue;
+}

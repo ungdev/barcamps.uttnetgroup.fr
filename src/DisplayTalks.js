@@ -14,8 +14,8 @@ class DisplayTalks extends Component {
 
   render() {
     var talks = ""
-    if (!this.state.talks.length === 0) {
-      talks = this.state.talks.map(e => <Talk talk={e}/>);
+    if (!this.state.talks.length == 0) {
+      talks = this.state.talks.map(e => <Talk talk={e} updateFilter={this.props.updateFilter}/>);
     }
     return (
       <div className="Presentations">
