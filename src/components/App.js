@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Navbar from './Navbar.js';
 import DisplayTalks from './DisplayTalks.js';
 import Admin from './Admin.js';
-import './App.css';
+import TalkService from '../services/TalkService.js'
+import '../App.css';
 
 class App extends Component {
 
@@ -24,8 +25,7 @@ class App extends Component {
   }
 
   _fetch() {
-    fetch('https://api.barcamps.uttnetgroup.fr/api/talk/?format=json')
-      .then(result => result.json())
+    TalkService.get()
       .then(talks => {
         talks = talks.filter(t =>
           t.barcamp.toString().match(this.state.filter[0]) && t.speaker.toString().match(this.state.filter[1]) && t.id.toString().match(this.state.filter[2]));

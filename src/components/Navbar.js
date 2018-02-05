@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import BarcampService from '../services/BarcampService.js';
+import SpeakerService from '../services/SpeakerService.js';
 
 class Navbar extends Component {
 
@@ -35,11 +37,9 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    fetch('https://api.barcamps.uttnetgroup.fr/api/barcamp/?format=json')
-      .then(result => result.json())
+    BarcampService.get()
       .then(barcamps => this.setState({barcamps}));
-    fetch('https://api.barcamps.uttnetgroup.fr/api/speaker/?format=json')
-      .then(result => result.json())
+    SpeakerService.get()
       .then(speakers => this.setState({speakers}));
   }
 

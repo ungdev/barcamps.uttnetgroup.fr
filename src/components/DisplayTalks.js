@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Talk from './Talk.js'
+import Talk from './Talk.js';
+import BarcampService from '../services/BarcampService.js';
+import SpeakerService from '../services/SpeakerService.js';
 
 class DisplayTalks extends Component {
 
@@ -24,22 +26,22 @@ class DisplayTalks extends Component {
   updateState(talks, filter) {
     this.setState({talks});
     this.setState({filter});
+    console.log(filter.toString());
     var title = "Tous les Barcamps";
     if (filter.toString() === ",,") {
       this.setState({title});
+      this.setState({email: ""})
     }
     if (filter[0] !== "") {
-    fetch('https://api.barcamps.uttnetgroup.fr/api/barcamp/'+filter[0]+'/?format=json')
-      .then(result => result.json())
+    BarcampService.getID(filter[0])
       .then(barcamp => {
         title = "Présentations du barcamp: " + barcamp.title;
         this.setState({title});
-        console.log('TA MERE');
+        this.setState({email: ""})
       });
     }
     if (filter[1] !== "") {
-      fetch('https://api.barcamps.uttnetgroup.fr/api/speaker/'+filter[1]+'/?format=json')
-        .then(result => result.json())
+      SpeakerService.getID(filter[1])
         .then(speaker => {
           if (title !== "") {
             title += " par ";
@@ -52,7 +54,8 @@ class DisplayTalks extends Component {
         });
     }
     if (filter[2] !== "") {
-      this.setState({title: ""})
+      this.setState({title: ""});
+      this.setState({email: ""})
     }
   }
 
