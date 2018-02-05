@@ -28,7 +28,7 @@ class App extends Component {
     TalkService.get()
       .then(talks => {
         talks = talks.filter(t =>
-          t.barcamp.toString().match(this.state.filter[0]) && t.speaker.toString().match(this.state.filter[1]) && t.id.toString().match(this.state.filter[2]));
+          t.barcamp_id.toString().match(this.state.filter[0]) && t.speaker_id.toString().match(this.state.filter[1]) && t.id.toString().match(this.state.filter[2]));
         return talks;
       })
       .then(talks => this.setState({talks}))

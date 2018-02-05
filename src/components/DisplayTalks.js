@@ -26,7 +26,6 @@ class DisplayTalks extends Component {
   updateState(talks, filter) {
     this.setState({talks});
     this.setState({filter});
-    console.log(filter.toString());
     var title = "Tous les Barcamps";
     if (filter.toString() === ",,") {
       this.setState({title});
