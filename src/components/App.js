@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { fetch } from '../actions';
 import Navbar from './Navbar.js';
 import DisplayTalks from './DisplayTalks.js';
 import Admin from './Admin.js';
@@ -7,21 +11,9 @@ import '../App.css';
 
 class App extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      filter: ["","",""],
-      talks: []
-    };
-  }
-
-  handleFilterUpdate(filterValue) {
-    this.setState({filter: filterValue});
-    this._fetch();
-  }
-
-  componentDidMount() {
-    this._fetch();
+  componentWillMount() {
+    console.log('COUCOU APP');
+    this.props.dispatch(fetch());
   }
 
   _fetch() {
@@ -39,14 +31,19 @@ class App extends Component {
       <div>
         <div className = 'Sidebar'>
           <Admin />
-          <Navbar talks={this.state.talks} filter={this.state.filter} updateFilter={this.handleFilterUpdate.bind(this)}/>
         </div>
         <div className = 'Content'>
-          <DisplayTalks filter = {this.state.filter} talks = {this.state.talks} updateFilter={this.handleFilterUpdate.bind(this)}/>
+          <DisplayTalks />
         </div>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    filter: state.filter.filter,
+    talks: state.talks.talks,
+  };
+}
+export default connect(mapStateToProps)(App);

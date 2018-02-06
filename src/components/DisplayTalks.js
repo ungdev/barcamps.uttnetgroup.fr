@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import Talk from './Talk.js';
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
+import { fetch } from '../actions/index'
 
 class DisplayTalks extends Component {
 
   constructor(props) {
     super(props);
     this.state={
-      talks : [],
-      filter: ["","",""],
       title: "",
       email: ""
     };
   }
 
-  componentDidMount() {
-    this.updateState(this.props.talks,this.props.filter);
-  }
-
   componentWillReceiveProps(nextProps) {
-    this.updateState(nextProps.talks,nextProps.filter);
+    this.updateTitle(nextProps.talks,nextProps.filter);
   }
 
-  updateState(talks, filter) {
-    this.setState({talks});
-    this.setState({filter});
+  updateTitle(talks, filter) {
     var title = "Tous les Barcamps";
     if (filter.toString() === ",,") {
       this.setState({title});
@@ -59,9 +55,11 @@ class DisplayTalks extends Component {
   }
 
   render() {
-    var talks = ""
-    if (!this.state.talks.length == 0) {
-      talks = this.state.talks.map(e => <Talk key={e.id} talk={e} updateFilter={this.props.updateFilter}/>);
+    var talks ="";
+    if (this.props.talks !== undefined) {
+      if (this.props.talks.length != 0 ){
+        talks = this.props.talks.map(e => <Talk key={e.id} talk={e} />);
+      }
     }
     return (
       <div className="Presentations">
@@ -75,4 +73,15 @@ class DisplayTalks extends Component {
 
 }
 
-export default DisplayTalks;
+function mapStateToProps(state) {
+  return {
+    filter: state.filter.filter,
+    talks: state.talks.talks,
+  };
+}
+
+function matchDispatchToProps(dispatch){
+  return bindActionCreators({fetch: fetch}, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(DisplayTalks);

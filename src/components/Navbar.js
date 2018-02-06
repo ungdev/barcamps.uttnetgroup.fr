@@ -99,17 +99,6 @@ class Navbar extends Component {
             Filtrer
           </button>
         </div>
-        <ul className='Link'>
-          <li className='Link'>
-            <a className = 'Link' href="https://ung.utt.fr/">Site UNG</a>
-          </li>
-          <li className='Link'>
-            <a className = 'Link' href="https://www.facebook.com/uttnetgroup/">UNG</a>
-          </li>
-          <li className='Link'>
-            <a className = 'Link' href="https://www.facebook.com/barcampsUTT/">Barcamps</a>
-          </li>
-        </ul>
       </div>
     );
   }

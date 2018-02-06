@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { filter, apply } from '../actions'
 
 class Talk extends Component {
 
@@ -29,26 +33,20 @@ class Talk extends Component {
     this.updateState(nextProps.talk);
   }
 
-  handleClick(type,event) {
-    var filter = []
-    switch (type) {
-      case "bar":
-        filter = [this.state.talk.barcamp.id,"",""];
-        break;
-      case "speaker":
-        filter = ["",this.state.talk.speaker.id,""];
-        break;
-      default:
-    }
-    this.props.updateFilter(filter)
+  handleClick(type,id) {
+    var p1 = new Promise((resolve,reject) => {
+      resolve(this.props.dispatch(filter(type,id)))});
+    p1.then(() => {
+      this.props.dispatch(apply(this.props.filter))})
+
   }
 
   render() {
     return(<div>
         <h1> {this.state.talk.title} </h1>
         <p>
-          <a className='Clickable' onClick={this.handleClick.bind(this,"bar")}> {this.state.talk.barcamp.title} </a>
-          par <a className='Clickable' onClick={this.handleClick.bind(this,"speaker")}> {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </a>
+          <a className='Clickable' onClick={this.handleClick.bind(this,"barcamp",this.state.talk.barcamp_id)}> {this.state.talk.barcamp.title} </a>
+          par <a className='Clickable' onClick={this.handleClick.bind(this,"speaker",this.state.talk.speaker_id)}> {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </a>
           le {this.state.date}
         </p>
       </div>
@@ -57,4 +55,10 @@ class Talk extends Component {
 
 }
 
-export default Talk;
+function mapStateToProps(state) {
+  return {
+    filter : state.filter.filter
+  };
+}
+
+export default connect(mapStateToProps)(Talk);
