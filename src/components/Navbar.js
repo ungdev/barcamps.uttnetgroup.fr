@@ -87,4 +87,5 @@ function mapStateToProps(state) {
     filter: state.filter.filter
   };
 }
+
 export default connect(mapStateToProps)(Navbar);

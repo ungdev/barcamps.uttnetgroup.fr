@@ -46,9 +46,9 @@ export function fetch(){
   }
 }
 
-export function addJWT(jwt) {
+export function addUser(token) {
   return {
-    type: "ADD_JWT",
-    payload: jwt
+    type: "ADD_USER",
+    payload: token
   }
 }

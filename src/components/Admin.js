@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import OauthService from '../services/OauthService'
-import { addJWT } from '../actions'
+import { addUser } from '../actions'
 
 class Admin extends Component {
   constructor(props) {
@@ -22,21 +22,27 @@ class Admin extends Component {
       form.append("authorization_code", authorization_code);
       fetch("https://api.barcamps.uttnetgroup.fr/api/oauth/token/", {method: 'post', body: form })
         .then(response => response.json())
-        .then(response => this.props.dispatch(addJWT(response)));
+        .then(response => this.props.dispatch(addUser(response)));
     }
   }
 
-  handleClick() {
-    console.log(window.location.href);
-  }
-
   render() {
-    return (<a className='Clickable' href= {this.state.oauth}> Accèes Admin </a>);
+    var admin = ""
+    if (this.props.admin.firstName !== undefined) {
+      admin = `Connecté en tant que ${this.props.admin.firstName} ${this.props.admin.lastName}`
+    }
+    return (
+      <div>
+        <a className='Clickable' href= {this.state.oauth}> Accèes Admin </a>
+        <p> {admin} </p>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
+    admin: state.admin.user
   };
 }
 export default connect(mapStateToProps)(Admin);
