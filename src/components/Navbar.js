@@ -52,7 +52,7 @@ class Navbar extends Component {
         <div className='Categories'>
           <label>
             Barcamp :
-            <select value={this.state.barcampID} onChange={this.handleChange.bind(this,"barcamp")}>
+            <select value={this.props.filter[0]} onChange={this.handleChange.bind(this,"barcamp")}>
               <option value=""> </option>
               {barcamps}
             </select>
@@ -61,7 +61,7 @@ class Navbar extends Component {
           <br/>
           <label>
             Speaker :
-            <select value={this.state.speakerID} onChange={this.handleChange.bind(this,"speaker")}>
+            <select value={this.props.filter[1]} onChange={this.handleChange.bind(this,"speaker")}>
               <option value=""> </option>
               {speakers}
             </select>
@@ -70,7 +70,7 @@ class Navbar extends Component {
           <br/>
           <label>
             Présentation :
-            <select value={this.state.talkID} onChange={this.handleChange.bind(this,"talk")}>
+            <select value={this.props.filter[2]} onChange={this.handleChange.bind(this,"talk")}>
               <option value=""> </option>
               {talks}
             </select>
