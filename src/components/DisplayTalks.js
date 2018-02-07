@@ -18,10 +18,10 @@ class DisplayTalks extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateTitle(nextProps.talks,nextProps.filter);
+    this.updateTitle(nextProps.filter);
   }
 
-  updateTitle(talks, filter) {
+  updateTitle(filter) {
     var title = "Tous les Barcamps";
     if (filter.toString() === ",,") {
       this.setState({title});
@@ -66,6 +66,7 @@ class DisplayTalks extends Component {
         <h1> {this.state.title} </h1>
         <p> {this.state.email} </p>
         <br/>
+        <a className='Clickable' onClick={() => this.props.dispatch(fetch())}> Tous afficher </a>
         {talks}
       </div>
     );
@@ -80,8 +81,4 @@ function mapStateToProps(state) {
   };
 }
 
-function matchDispatchToProps(dispatch){
-  return bindActionCreators({fetch: fetch}, dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(DisplayTalks);
+export default connect(mapStateToProps)(DisplayTalks);

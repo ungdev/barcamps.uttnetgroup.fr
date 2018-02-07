@@ -1,39 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
+import { filter, apply } from '../actions'
 
 class Navbar extends Component {
 
   constructor() {
     super();
     this.state = {
-      talkID: "",
-      barcampID: "",
-      speakerID: "",
       barcamps: [],
-      speakers: [],
-      talks: []
+      speakers: []
     }
   }
 
   handleChange(type,event) {
-    switch (type) {
-      case 'bar':
-        this.setState({barcampID: event.target.value});
-        break;
-      case 'talk':
-        this.setState({talkID: event.target.value});
-        break;
-      case 'speaker':
-        this.setState({speakerID: event.target.value});
-        break;
-      default:
-    }
-  }
-
-  handleClick(event) {
-    const filter = [this.state.barcampID,this.state.speakerID,this.state.talkID]
-    this.props.updateFilter(filter)
+    var p1 = new Promise((resolve,reject) => {
+      resolve(this.props.dispatch(filter(type,event.target.value)))});
+    p1.then(() => {
+      this.props.dispatch(apply(this.props.filter))})
   }
 
   componentDidMount() {
@@ -41,13 +27,6 @@ class Navbar extends Component {
       .then(barcamps => this.setState({barcamps}));
     SpeakerService.get()
       .then(speakers => this.setState({speakers}));
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({barcampID: nextProps.filter[0]});
-    this.setState({speakerID: nextProps.filter[1]});
-    this.setState({talkID: nextProps.filter[2]})
-    this.setState({talks: nextProps.talks})
   }
 
   render() {
@@ -58,9 +37,12 @@ class Navbar extends Component {
     var speakers = this.state.speakers.map(s => {
       return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
     });
-    var talks = this.state.talks.map(t => {
-      return  <option key={t.id} value={t.id}>{t.title}</option>
-    });
+    var talks ="";
+    if (this.props.talks !== undefined) {
+      if (this.props.talks.length != 0 ){
+        talks = this.props.talks.map(t => <option key={t.id} value={t.id}>{t.title}</option>);
+      }
+    }
     return(
       <div>
         <div className='Header'>
@@ -70,7 +52,7 @@ class Navbar extends Component {
         <div className='Categories'>
           <label>
             Barcamp :
-            <select value={this.state.barcampID} onChange={this.handleChange.bind(this,"bar")}>
+            <select value={this.state.barcampID} onChange={this.handleChange.bind(this,"barcamp")}>
               <option value=""> </option>
               {barcamps}
             </select>
@@ -93,15 +75,16 @@ class Navbar extends Component {
               {talks}
             </select>
           </label>
-          <br/>
-          <br/>
-          <button onClick={this.handleClick.bind(this)}>
-            Filtrer
-          </button>
         </div>
       </div>
     );
   }
 }
 
-export default Navbar
+function mapStateToProps(state) {
+  return {
+    talks: state.talks.talks,
+    filter: state.filter.filter
+  };
+}
+export default connect(mapStateToProps)(Navbar);

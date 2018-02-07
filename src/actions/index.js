@@ -14,19 +14,16 @@ export function filter(type, ID){
         type: "FILTER_BARCAMP",
         payload: ID
       }
-      break;
     case "speaker":
       return {
         type: "FILTER_SPEAKER",
         payload: ID
       }
-      break;
     case "talk":
       return {
         type: "FILTER_TALK",
         payload: ID
       }
-      break;
     default:
       return console.log('ERRROR');
   }
@@ -50,7 +47,8 @@ export function fetch(){
   return function(dispatch) {
     TalkService.get()
       .then(talks => {
+        dispatch({type: "RESET_FILTER", payload: 1})
         dispatch({type: "FETCH__FULFILLED", payload: talks})
-      })
+      });
   }
 }

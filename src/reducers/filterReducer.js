@@ -12,6 +12,9 @@ export default function reducer(state={
     case "FILTER_TALK":
       return {...state, filter: ["","",action.payload]}
 
+    case "RESET_FILTER":
+      return {...state, filter: ["","",""]}
+      
     default:
       return state
   }
