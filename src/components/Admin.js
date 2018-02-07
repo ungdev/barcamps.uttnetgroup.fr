@@ -27,16 +27,13 @@ class Admin extends Component {
   }
 
   render() {
-    var admin = ""
+    var admin = <p></p>
     if (this.props.admin.firstName !== undefined) {
-      admin = `Connecté en tant que ${this.props.admin.firstName} ${this.props.admin.lastName}`
+      admin = <p> Connecté en tant que {this.props.admin.firstName} {this.props.admin.lastName} </p>
+    } else {
+      admin = <a className='Clickable' href= {this.state.oauth}> Connexion </a>
     }
-    return (
-      <div>
-        <a className='Clickable' href= {this.state.oauth}> Accèes Admin </a>
-        <p> {admin} </p>
-      </div>
-    );
+    return (<div>{admin}</div>);
   }
 }
 
