@@ -1,12 +1,5 @@
 import TalkService from '../services/TalkService';
 
-export const applyFilter = (filter) => {
-  return {
-    type: "FILTER",
-    payload: filter
-  }
-};
-
 export function filter(type, ID){
   switch (type) {
     case "barcamp":
@@ -50,5 +43,12 @@ export function fetch(){
         dispatch({type: "RESET_FILTER", payload: 1})
         dispatch({type: "FETCH__FULFILLED", payload: talks})
       });
+  }
+}
+
+export function addJWT(jwt) {
+  return {
+    type: "ADD_JWT",
+    payload: jwt
   }
 }

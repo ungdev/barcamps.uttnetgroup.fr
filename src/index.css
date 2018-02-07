@@ -19,14 +19,15 @@ div#root {
   color: #fff;
   border: 0;
   padding: 1em;
-  width: 25%;
+  width: 20%;
   height: 100%;
   position: fixed;
   overflow: auto;
 }
 
 .Content {
-  margin-left: 28%;
+  padding: 1em;
+  margin-left: 25%;
   color: #3d4f5d;
 }
 
