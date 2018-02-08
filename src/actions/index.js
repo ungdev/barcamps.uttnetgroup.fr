@@ -52,3 +52,10 @@ export function addUser(token) {
     payload: token
   }
 }
+
+export function create(type) {
+  return {
+    type: "CREATE",
+    payload: type
+  }
+}

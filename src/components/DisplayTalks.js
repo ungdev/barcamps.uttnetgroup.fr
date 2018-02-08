@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import Talk from './Talk.js';
+import CreateForm from './CreateForm';
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
 import { fetch } from '../actions/index'
@@ -64,7 +65,9 @@ class DisplayTalks extends Component {
     return (
       <div className="Presentations">
         <h1> {this.state.title} </h1>
-        <p> {this.state.email} </p>
+        <a href={`mailto:${this.state.email}`}> {this.state.email} </a>
+        <br/>
+        <CreateForm />
         <br/>
         <a className='Clickable' onClick={() => this.props.dispatch(fetch())}> Tous afficher </a>
         {talks}
@@ -77,7 +80,7 @@ class DisplayTalks extends Component {
 function mapStateToProps(state) {
   return {
     filter: state.filter.filter,
-    talks: state.talks.talks,
+    talks: state.talks.talks
   };
 }
 
