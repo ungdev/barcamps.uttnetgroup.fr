@@ -20,36 +20,26 @@ const initialState = {
 class CreateForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      barcamps: [],
-      speakers: []
-    };
   }
 
   componentWillReceiveProps(nextProps){
     this.setState(initialState);
   }
 
-  componentDidMount() {
-    BarcampService.get()
-      .then(barcamps => this.setState({barcamps}));
-    SpeakerService.get()
-      .then(speakers => this.setState({speakers}));
-  }
-
   handleClick(type,event){
+    let content = {};
     switch (type) {
       case "barcamp":
-        var date = new Date(this.state.date)
+        let date = new Date(this.state.date)
         date = date.toISOString()
-        var content = {
+        content = {
           title: this.state.title,
           description: this.state.description,
           date: date};
         BarcampService.post(this.props.token,content);
         break;
       case "talk":
-        var content = {
+        content = {
           title: this.state.title,
           description: this.state.description,
           barcamp_id: this.state.barcamp_id,
@@ -59,15 +49,15 @@ class CreateForm extends Component {
         TalkService.post(this.props.token,content);
         break;
       case "speaker":
-        var content = {
+        content = {
           firstname: this.state.firstName,
           lastname: this.state.lastName,
           email: this.state.email};
         SpeakerService.post(this.props.token,content);
         break;
       default:
-
     }
+    this.setState(initialState)
   }
 
   handleChange(type,event){
@@ -88,12 +78,11 @@ class CreateForm extends Component {
   }
 
   handleFile(event){
-    console.log(event.target);
     this.setState({slides: event.target.files[0]})
   }
 
   getListSpeakers() {
-    var speakers = this.state.speakers.map(s => {
+    let speakers = this.props.speakers.map(s => {
       return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
     });
     return(<select value={this.state.speaker_id} onChange={this.handleChangeID.bind(this,"speaker")}>
@@ -103,8 +92,8 @@ class CreateForm extends Component {
   }
 
   getListBarcamps() {
-    var barcamps = this.state.barcamps.map(b => {
-      var event = new Date(b.date);
+    let barcamps = this.props.barcamps.map(b => {
+      let event = new Date(b.date);
       return  <option key={b.id} value={b.id}>{b.title} le {event.toLocaleDateString('fr-FR')}</option>
     });
     return (<select value={this.state.barcamp_id} onChange={this.handleChangeID.bind(this,"barcamp")}>
@@ -114,7 +103,7 @@ class CreateForm extends Component {
   }
 
   render() {
-    var form = '';
+    let form = '';
     switch (this.props.create) {
       case "barcamp":
         form = <div>
@@ -173,7 +162,9 @@ class CreateForm extends Component {
 function mapStateToProps(state) {
   return {
     create: state.create.create,
-    token: state.admin.token
+    token: state.admin.token,
+    barcamps: state.data.barcamps,
+    speakers: state.data.speakers
   };
 }
 

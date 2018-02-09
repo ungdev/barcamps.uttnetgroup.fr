@@ -1,4 +1,6 @@
 import TalkService from '../services/TalkService';
+import BarcampService from '../services/BarcampService';
+import SpeakerService from '../services/SpeakerService';
 
 export function filter(type, ID){
   switch (type) {
@@ -38,11 +40,21 @@ export function apply(filter){
 
 export function fetch(){
   return function(dispatch) {
+    let data = {};
     TalkService.get()
-      .then(talks => {
-        dispatch({type: "RESET_FILTER", payload: 1})
-        dispatch({type: "FETCH__FULFILLED", payload: talks})
-      });
+        .then(talks => {
+          data = {...data, talks: talks};
+          dispatch({type: "RESET_FILTER", payload: 1});
+          BarcampService.get()
+            .then(barcamps => {
+              data = {...data, barcamps: barcamps};
+              SpeakerService.get()
+                .then(speakers => {
+                  data = {...data,speakers: speakers};
+                  dispatch({type: "FETCH__FULFILLED", payload: data})
+                })
+            })
+        })
   }
 }
 

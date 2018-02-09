@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import Talk from './Talk.js';
 import CreateForm from './CreateForm';
+import EditTalk from './EditTalk';
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
 import { fetch } from '../actions/index'
@@ -23,7 +24,7 @@ class DisplayTalks extends Component {
   }
 
   updateTitle(filter) {
-    var title = "Tous les Barcamps";
+    let title = "Tous les Barcamps";
     if (filter.toString() === ",,") {
       this.setState({title});
       this.setState({email: ""})
@@ -56,9 +57,12 @@ class DisplayTalks extends Component {
   }
 
   render() {
-    var talks ="";
+    let talks ="";
     if (this.props.talks !== undefined) {
-      if (this.props.talks.length != 0 ){
+      if (this.props.admin.exist) {
+        talks = this.props.talks.map(e => <EditTalk key={e.id} talk={e} />);
+      }
+      else if (this.props.talks.length != 0) {
         talks = this.props.talks.map(e => <Talk key={e.id} talk={e} />);
       }
     }
@@ -80,7 +84,8 @@ class DisplayTalks extends Component {
 function mapStateToProps(state) {
   return {
     filter: state.filter.filter,
-    talks: state.talks.talks
+    talks: state.data.talks,
+    admin: state.admin
   };
 }
 

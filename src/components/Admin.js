@@ -16,10 +16,10 @@ class Admin extends Component {
   componentDidMount() {
     OauthService.get()
       .then(oauth => {this.setState({oauth});return oauth})
-    var codes = window.location.search.split(/=|&/);
-    var authorization_code = codes[1];
+    let codes = window.location.search.split(/=|&/);
+    let authorization_code = codes[1];
     if (authorization_code !== undefined) {
-      var form = new FormData();
+      let form = new FormData();
       form.append("authorization_code", authorization_code);
       fetch("https://api.barcamps.uttnetgroup.fr/api/oauth/token/", {method: 'POST', body: form })
         .then(response => response.json())
@@ -28,8 +28,8 @@ class Admin extends Component {
   }
 
   render() {
-    var admin = <div></div>
-    if (this.props.admin.firstName !== undefined) {
+    let admin = <div></div>
+    if (this.props.admin.exist) {
       admin = <div><p> Connecté en tant que {this.props.admin.firstName} {this.props.admin.lastName} </p>
         <Create /> </div>
     } else {

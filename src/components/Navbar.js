@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import BarcampService from '../services/BarcampService.js';
-import SpeakerService from '../services/SpeakerService.js';
 import { filter, apply } from '../actions'
 
 class Navbar extends Component {
@@ -22,19 +20,12 @@ class Navbar extends Component {
       this.props.dispatch(apply(this.props.filter))})
   }
 
-  componentDidMount() {
-    BarcampService.get()
-      .then(barcamps => this.setState({barcamps}));
-    SpeakerService.get()
-      .then(speakers => this.setState({speakers}));
-  }
-
   render() {
-    var barcamps = this.state.barcamps.map(b => {
+    var barcamps = this.props.barcamps.map(b => {
       var event = new Date(b.date);
       return  <option key={b.id} value={b.id}>{b.title} le {event.toLocaleDateString('fr-FR')}</option>
     });
-    var speakers = this.state.speakers.map(s => {
+    var speakers = this.props.speakers.map(s => {
       return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
     });
     var talks ="";
@@ -83,8 +74,10 @@ class Navbar extends Component {
 
 function mapStateToProps(state) {
   return {
-    talks: state.talks.talks,
-    filter: state.filter.filter
+    talks: state.data.talks,
+    filter: state.filter.filter,
+    barcamps: state.data.barcamps,
+    speakers: state.data.speakers
   };
 }
 

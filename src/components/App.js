@@ -6,7 +6,6 @@ import { fetch } from '../actions';
 import Navbar from './Navbar.js';
 import DisplayTalks from './DisplayTalks.js';
 import Admin from './Admin.js';
-import TalkService from '../services/TalkService.js'
 import '../App.css';
 
 class App extends Component {

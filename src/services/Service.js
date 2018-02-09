@@ -30,4 +30,23 @@ export default class Service {
     fetch(`https://api.barcamps.uttnetgroup.fr/api/${this.name}/`,setting)
   }
 
+  putID(token, id, content){
+    var form = new FormData();
+    content = Object.entries(content);
+    content.forEach(c => {
+      if (c[0] === "barcamp_id" || c[0] === "speaker_id") {
+        c[1] = Number(c[1]);
+        console.log(c[1]);
+      }
+      form.append(c[0].toString(),c[1])
+    });
+    token = "Bearer " + token;
+    console.log(token);
+    console.log(content);
+    var setting = {method: 'PUT', headers: {"Authorization": token}, body: form}
+    fetch(`https://api.barcamps.uttnetgroup.fr/api/${this.name}/${id}/`,setting)
+      .then(e => e.json())
+      .then(e => console.log(e))
+  }
+
 }

@@ -18,8 +18,8 @@ class Talk extends Component {
 
   updateState(talk) {
     this.setState({talk});
-    var event = new Date(talk.barcamp.date);
-    var options = {year: 'numeric', month: 'long', day: 'numeric' };
+    let event = new Date(talk.barcamp.date);
+    let options = {year: 'numeric', month: 'long', day: 'numeric' };
     this.setState({date: event.toLocaleDateString('fr-FR', options)});
 
   }
@@ -33,7 +33,7 @@ class Talk extends Component {
   }
 
   handleClick(type,id) {
-    var p1 = new Promise((resolve,reject) => {
+    let p1 = new Promise((resolve,reject) => {
       resolve(this.props.dispatch(filter(type,id)))});
     p1.then(() => {
       this.props.dispatch(apply(this.props.filter))})
@@ -56,7 +56,8 @@ class Talk extends Component {
 
 function mapStateToProps(state) {
   return {
-    filter : state.filter.filter
+    filter : state.filter.filter,
+    admin : state.admin
   };
 }
 
