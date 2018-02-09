@@ -7,7 +7,7 @@ import CreateForm from './CreateForm';
 import EditTalk from './EditTalk';
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
-import { fetch } from '../actions/index'
+import { fetchTalks } from '../actions/index'
 
 class DisplayTalks extends Component {
 
@@ -73,7 +73,7 @@ class DisplayTalks extends Component {
         <br/>
         <CreateForm />
         <br/>
-        <a className='Clickable' onClick={() => this.props.dispatch(fetch())}> Tous afficher </a>
+        <a className='Clickable' onClick={() => this.props.dispatch(fetchTalks())}> Tous afficher </a>
         {talks}
       </div>
     );

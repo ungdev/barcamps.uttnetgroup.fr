@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-import { fetch } from '../actions';
+import { fetchTalks, fetchBarcamps, fetchSpeakers } from '../actions';
 import Navbar from './Navbar.js';
 import DisplayTalks from './DisplayTalks.js';
 import Admin from './Admin.js';
@@ -11,7 +11,9 @@ import '../App.css';
 class App extends Component {
 
   componentWillMount() {
-    this.props.dispatch(fetch());
+    this.props.dispatch(fetchTalks());
+    this.props.dispatch(fetchBarcamps());
+    this.props.dispatch(fetchSpeakers());
   }
 
   render() {

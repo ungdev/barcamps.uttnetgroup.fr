@@ -7,17 +7,17 @@ export default function reducer(state={
 }, action) {
 
   switch (action.type) {
-    case "UPDATE":
+    case "FETCH__TALKS":
       return {...state,
-        talks: action.payload.talks,
-        speakers: action.payload.speakers,
-        barcamps: action.payload.barcamps
+        talks: action.payload
       };
-    case "FETCH__FULFILLED":
+    case "FETCH__BARCAMPS":
       return {...state,
-        talks: action.payload.talks,
-        speakers: action.payload.speakers,
-        barcamps: action.payload.barcamps
+        barcamps: action.payload
+      };
+    case "FETCH__SPEAKERS":
+      return {...state,
+        speakers: action.payload
       };
     default:
       return state

@@ -33,28 +33,32 @@ export function apply(filter){
         return talks;
       })
       .then(talks => {
-        dispatch({type: "UPDATE", payload: talks})
+        dispatch({type: "FETCH__TALKS", payload: talks})
       })
     }
 }
 
-export function fetch(){
+export function fetchTalks(){
   return function(dispatch) {
-    let data = {};
     TalkService.get()
         .then(talks => {
-          data = {...data, talks: talks};
           dispatch({type: "RESET_FILTER", payload: 1});
-          BarcampService.get()
-            .then(barcamps => {
-              data = {...data, barcamps: barcamps};
-              SpeakerService.get()
-                .then(speakers => {
-                  data = {...data,speakers: speakers};
-                  dispatch({type: "FETCH__FULFILLED", payload: data})
-                })
-            })
-        })
+          dispatch({type: "FETCH__TALKS", payload: talks})
+      });
+  }
+}
+
+export function fetchBarcamps(){
+  return function(dispatch) {
+    BarcampService.get()
+        .then(barcamps => dispatch({type: "FETCH__BARCAMPS", payload: barcamps}));
+  }
+}
+
+export function fetchSpeakers(){
+  return function(dispatch) {
+    SpeakerService.get()
+        .then(speakers => dispatch({type: "FETCH__SPEAKERS", payload: speakers}));
   }
 }
 
