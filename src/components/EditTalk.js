@@ -81,7 +81,7 @@ class EditTalk extends Component {
 
   render() {
     return(<div>
-        <h1> <input type='form' value={this.state.title} onChange={this.handleChange.bind(this,'title')} /> </h1>
+        <h1> <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} /> </h1>
         <br/>
         Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
         <br/>

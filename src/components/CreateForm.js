@@ -112,9 +112,9 @@ class CreateForm extends Component {
         form = <div>
           <p>Création barcamp:</p>
           <br/>
-          Titre: <input type='form' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
+          Titre: <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
           <br/>
-          Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
+          Description: <input type='text' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
           <br/>
           Date: <input type='date' value={this.state.date} onChange={this.handleChange.bind(this,'date')} />
           <br/>
@@ -125,9 +125,9 @@ class CreateForm extends Component {
         form = <div>
           <p>Création présentation:</p>
           <br/>
-          Titre: <input type='form' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
+          Titre: <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
           <br/>
-          Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
+          Description: <input type='text' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
           <br/>
           Barcamp: {this.getListBarcamps()}
           <br/>
@@ -142,11 +142,11 @@ class CreateForm extends Component {
       form = <div>
           <p>Création speaker:</p>
           <br/>
-          Prénom: <input type='form' value={this.state.firstName} onChange={this.handleChange.bind(this,'firstName')} />
+          Prénom: <input type='text' value={this.state.firstName} onChange={this.handleChange.bind(this,'firstName')} />
           <br/>
-          Nom: <input type='form' value={this.state.lastName} onChange={this.handleChange.bind(this,'lastName')} />
+          Nom: <input type='text' value={this.state.lastName} onChange={this.handleChange.bind(this,'lastName')} />
           <br/>
-          Email: <input type='form' value={this.state.email} onChange={this.handleChange.bind(this,'email')} />
+          Email: <input type='text' value={this.state.email} onChange={this.handleChange.bind(this,'email')} />
           <br/>
           <button type='button' onClick={this.handleClick.bind(this,"speaker")}>Ajouter</button>
         </div>

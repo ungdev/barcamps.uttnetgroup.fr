@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Talk from './Talk.js';
 import CreateForm from './CreateForm';
 import EditTalk from './EditTalk';
+import EditBarcamp from './EditBarcamp'
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
 import { fetchTalks } from '../actions/index'
@@ -33,6 +34,7 @@ class DisplayTalks extends Component {
     BarcampService.getID(filter[0])
       .then(barcamp => {
         title = "Présentations du barcamp: " + barcamp.title;
+        this.setState({barcamp})
         this.setState({title});
         this.setState({email: ""})
       });
@@ -66,12 +68,19 @@ class DisplayTalks extends Component {
         talks = this.props.talks.map(e => <Talk key={e.id} talk={e} />);
       }
     }
+    let edit = "";
+    if (this.props.filter[0] !== ""){
+      edit = <EditBarcamp barcamp={this.state.barcamp}/>
+    }
+    
     return (
       <div className="Presentations">
         <h1> {this.state.title} </h1>
         <a href={`mailto:${this.state.email}`}> {this.state.email} </a>
         <br/>
         <CreateForm />
+        <br/>
+        {edit}
         <br/>
         <a className='Clickable' onClick={() => this.props.dispatch(fetchTalks())}> Tous afficher </a>
         {talks}

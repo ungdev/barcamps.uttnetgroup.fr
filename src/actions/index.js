@@ -89,3 +89,17 @@ export function addTalk(talk) {
     payload: talk
   }
 }
+
+export function deleteBarcamp(id){
+  return {
+    type : "DELETE_BARCAMP",
+    payload: id
+  }
+}
+
+export function updateBarcamp(barcamp){
+  return {
+    type: "UPDATE_BARCAMP",
+    payload: barcamp
+  }
+}

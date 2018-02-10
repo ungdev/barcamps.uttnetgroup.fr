@@ -26,6 +26,15 @@ export default function reducer(state={
       let newTalks = state.talks.concat();
       newTalks.push(action.payload);
       return {...state, talks: newTalks};
+    case "DELETE_BARCAMP":
+      let barcamps = state.barcamps.filter(b => b.id !== action.payload);
+      return {...state, barcamps: barcamps};
+    case "UPDATE_BARCAMP":
+      let nbarcamps = state.barcamps.concat();
+      let barcamp = state.barcamps[action.payload.id];
+      barcamp = Object.assign(barcamp, action.payload);
+      nbarcamps.splice(action.payload.id, 1, barcamp);
+      return {...state, barcamps: nbarcamps}
     default:
       return state
   }
