@@ -75,3 +75,17 @@ export function create(type) {
     payload: type
   }
 }
+
+export function deleteTalk(id) {
+  return {
+    type :"DELETE_TALK",
+    payload: id
+  }
+}
+
+export function addTalk(talk) {
+  return {
+    type: "ADD_TALK",
+    payload: talk
+  }
+}

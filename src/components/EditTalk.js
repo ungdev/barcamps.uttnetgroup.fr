@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import TalkService from '../services/TalkService'
+import { deleteTalk } from '../actions'
 
 class EditTalk extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      talk: {
-        barcamp: {},
-        speaker: {}
-      },
       date: ""
     }
   }
@@ -40,6 +37,12 @@ class EditTalk extends Component {
 
   handleChange(type,event){
       this.setState({[type]: event.target.value})
+  }
+
+  handleDelete(event) {
+    TalkService.deleteID(this.props.token,this.state.id);
+    this.props.dispatch(deleteTalk(this.state.id));
+
   }
 
   handleChangeID(type, event){
@@ -86,7 +89,8 @@ class EditTalk extends Component {
         <br/>
         Speaker: {this.getListSpeakers()}
         <br/>
-        <button type='button' onClick={this.handleClick.bind(this,"talk")}>Modifier</button>
+        <button type='button' onClick={this.handleClick.bind(this)}>Modifier</button>
+        <button type ='button' onClick={this.handleDelete.bind(this)}>Supprimer</button>
       </div>
     )
   }

@@ -19,6 +19,13 @@ export default function reducer(state={
       return {...state,
         speakers: action.payload
       };
+    case "DELETE_TALK":
+      let talks = state.talks.filter(t => t.id !== action.payload);
+      return {...state, talks: talks};
+    case "ADD_TALK":
+      let newTalks = state.talks.concat();
+      newTalks.push(action.payload);
+      return {...state, talks: newTalks};
     default:
       return state
   }

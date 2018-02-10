@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { fetchTalks, addTalk } from '../actions'
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
 import TalkService from '../services/TalkService.js';
@@ -47,6 +48,8 @@ class CreateForm extends Component {
           slides: this.state.slides
         };
         TalkService.post(this.props.token,content);
+        content = {...content, id: this.props.lastTalk.id+1}
+        this.props.dispatch(addTalk(content))
         break;
       case "speaker":
         content = {
@@ -164,7 +167,8 @@ function mapStateToProps(state) {
     create: state.create.create,
     token: state.admin.token,
     barcamps: state.data.barcamps,
-    speakers: state.data.speakers
+    speakers: state.data.speakers,
+    lastTalk: state.data.talks[state.data.talks.length-1]
   };
 }
 
