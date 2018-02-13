@@ -9,6 +9,7 @@ import EditBarcamp from './EditBarcamp'
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
 import { fetchTalks } from '../actions/index'
+import '../styles/App.css'
 
 class DisplayTalks extends Component {
 
@@ -25,7 +26,7 @@ class DisplayTalks extends Component {
   }
 
   updateTitle(filter) {
-    let title = "Tous les Barcamps";
+    let title = "TOUS LES BARCAMPS";
     if (filter.toString() === ",,") {
       this.setState({title});
       this.setState({email: ""})
@@ -69,21 +70,23 @@ class DisplayTalks extends Component {
       }
     }
     let edit = "";
-    if (this.props.filter[0] !== ""){
+    if (this.props.filter[0] !== "" && this.props.admin.exist){
       edit = <EditBarcamp barcamp={this.state.barcamp}/>
     }
-    
+
     return (
-      <div className="Presentations">
-        <h1> {this.state.title} </h1>
-        <a href={`mailto:${this.state.email}`}> {this.state.email} </a>
-        <br/>
-        <CreateForm />
-        <br/>
-        {edit}
-        <br/>
-        <a className='Clickable' onClick={() => this.props.dispatch(fetchTalks())}> Tous afficher </a>
+      <div className='Content'>
+        <div className='Head'>
+          <h1> {this.state.title} <a className='DisplayAll' onClick={() => this.props.dispatch(fetchTalks())}> Tous afficher </a> </h1>
+          <a href={`mailto:${this.state.email}`}> {this.state.email} </a>
+          <br/>
+          <CreateForm />
+          <br/>
+          {edit}
+        </div>
+        <div className='Talks'>
         {talks}
+        </div>
       </div>
     );
   }

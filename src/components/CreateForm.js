@@ -5,6 +5,7 @@ import { fetchTalks, addTalk } from '../actions'
 import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
 import TalkService from '../services/TalkService.js';
+import '../styles/Talk.css';
 
 const initialState = {
   title: '',
@@ -155,7 +156,7 @@ class CreateForm extends Component {
         return form
     }
     return(
-      <div>
+      <div className='Talk'>
         {form}
       </div>
     )

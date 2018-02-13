@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import TalkService from '../services/TalkService'
 import { deleteTalk } from '../actions'
+import '../styles/Talk.css';
 
 class EditTalk extends Component {
 
@@ -80,7 +81,7 @@ class EditTalk extends Component {
   }
 
   render() {
-    return(<div>
+    return(<div className='Talk'>
         <h1> <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} /> </h1>
         <br/>
         Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />

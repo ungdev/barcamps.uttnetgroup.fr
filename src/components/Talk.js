@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { filter, apply } from '../actions'
+import '../styles/Talk.css';
 
 class Talk extends Component {
 
@@ -41,12 +42,13 @@ class Talk extends Component {
   }
 
   render() {
-    return(<div>
+    return(<div className='Talk'>
         <h1> {this.state.talk.title} </h1>
         <p>
           <a className='Clickable' onClick={this.handleClick.bind(this,"barcamp",this.state.talk.barcamp_id)}> {this.state.talk.barcamp.title} </a>
           par <a className='Clickable' onClick={this.handleClick.bind(this,"speaker",this.state.talk.speaker_id)}> {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </a>
           le {this.state.date}
+          <p> {this.state.talk.description} </p>
         </p>
       </div>
     )

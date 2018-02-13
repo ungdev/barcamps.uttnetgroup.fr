@@ -30,7 +30,7 @@ class Admin extends Component {
   render() {
     let admin = <div></div>
     if (this.props.admin.exist) {
-      admin = <div><p> Connecté en tant que {this.props.admin.user.firstName} {this.props.admin.user.lastName} </p>
+      admin = <div><a> Connecté en tant que {this.props.admin.user.firstName} {this.props.admin.user.lastName} </a>
         <Create /> </div>
     } else {
       admin = <a className='Clickable' href= {this.state.oauth}> Connexion </a>

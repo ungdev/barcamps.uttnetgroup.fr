@@ -6,7 +6,7 @@ import { fetchTalks, fetchBarcamps, fetchSpeakers } from '../actions';
 import Navbar from './Navbar.js';
 import DisplayTalks from './DisplayTalks.js';
 import Admin from './Admin.js';
-import '../App.css';
+import '../styles/App.css';
 
 class App extends Component {
 
@@ -19,13 +19,12 @@ class App extends Component {
   render() {
     return (
       <div>
+        <div className = 'Background'></div>
         <div className = 'Sidebar'>
           <Admin />
           <Navbar />
         </div>
-        <div className = 'Content'>
-          <DisplayTalks />
-        </div>
+        <DisplayTalks />
       </div>
     );
   }
