@@ -10,6 +10,7 @@ import BarcampService from '../services/BarcampService.js';
 import SpeakerService from '../services/SpeakerService.js';
 import { fetchTalks } from '../actions/index'
 import '../styles/App.css'
+import EditSpeaker from './EditSpeaker'
 
 class DisplayTalks extends Component {
 
@@ -51,6 +52,7 @@ class DisplayTalks extends Component {
           title += speaker.firstname + " " + speaker.lastname;
           this.setState({title});
           this.setState({email: speaker.email})
+          this.setState({speaker})
         });
     }
     if (filter[2] !== "") {
@@ -72,6 +74,8 @@ class DisplayTalks extends Component {
     let edit = "";
     if (this.props.filter[0] !== "" && this.props.admin.exist){
       edit = <EditBarcamp barcamp={this.state.barcamp}/>
+    } else if (this.props.filter[1] !== ""  && this.props.admin.exist) {
+      edit = <EditSpeaker speaker={this.state.speaker}/>
     }
 
     return (
@@ -79,13 +83,11 @@ class DisplayTalks extends Component {
         <div className='Head'>
           <h1> {this.state.title} <a className='DisplayAll' onClick={() => this.props.dispatch(fetchTalks())}> Tous afficher </a> </h1>
           <a href={`mailto:${this.state.email}`}> {this.state.email} </a>
-          <br/>
-          <CreateForm />
-          <br/>
-          {edit}
         </div>
         <div className='Talks'>
-        {talks}
+          <CreateForm />
+          {edit}
+          {talks}
         </div>
       </div>
     );

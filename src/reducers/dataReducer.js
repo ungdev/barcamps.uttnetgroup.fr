@@ -35,6 +35,12 @@ export default function reducer(state={
       barcamp = Object.assign(barcamp, action.payload);
       nbarcamps.splice(action.payload.id, 1, barcamp);
       return {...state, barcamps: nbarcamps}
+    case "UPDATE_SPEAKER":
+      let nspeakers = state.speakers.concat();
+      let speaker = state.speakers[action.payload.id];
+      speaker = Object.assign(speaker, action.payload);
+      nspeakers.splice(action.payload.id, 1, speaker);
+      return {...state, speakers: nspeakers}
     default:
       return state
   }

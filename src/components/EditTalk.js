@@ -84,11 +84,11 @@ class EditTalk extends Component {
     return(<div className='Talk'>
         <h1> <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} /> </h1>
         <br/>
-        Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
-        <br/>
         Barcamp: {this.getListBarcamps()}
         <br/>
         Speaker: {this.getListSpeakers()}
+        <br/>
+        Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
         <br/>
         <button type='button' onClick={this.handleClick.bind(this)}>Modifier</button>
         <button type ='button' onClick={this.handleDelete.bind(this)}>Supprimer</button>

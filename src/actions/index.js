@@ -103,3 +103,14 @@ export function updateBarcamp(barcamp){
     payload: barcamp
   }
 }
+
+export function deleteSpeaker(id){
+  return console.log("CC");
+}
+
+export function updateSpeaker(speaker){
+  return {
+    type: "UPDATE_SPEAKER",
+    payload: speaker
+  }
+}
