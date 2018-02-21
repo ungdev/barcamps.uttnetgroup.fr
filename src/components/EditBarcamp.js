@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import BarcampService from '../services/BarcampService'
-import { deleteBarcamp, updateBarcamp } from '../actions'
+import { deleteBarcamp, updateBarcamp, fetchTalks } from '../actions'
+import '../styles/Talk.css';
 
 class EditBarcamp extends Component {
 
@@ -46,11 +47,12 @@ class EditBarcamp extends Component {
   handleDelete(event) {
     BarcampService.deleteID(this.props.token,this.state.id);
     this.props.dispatch(deleteBarcamp(this.state.id));
+    this.props.dispatch(fetchTalks())
 
   }
 
   render() {
-    return(<div>
+    return(<div className='Talk'>
         <h1> <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} /> </h1>
         <br/>
         Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />

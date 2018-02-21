@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import SpeakerService from '../services/SpeakerService'
-import { deleteSpeaker, updateSpeaker } from '../actions'
+import { deleteSpeaker, updateSpeaker, fetchTalks } from '../actions'
+import '../styles/Talk.css';
 
 class EditSpeaker extends Component {
 
@@ -26,7 +27,6 @@ class EditSpeaker extends Component {
       lastname: this.state.lastname,
       email: this.state.email
     };
-    console.log(content);
     SpeakerService.putID(this.props.token,this.state.id,content);
     content = {...content, id: this.state.id};
     this.props.dispatch(updateSpeaker(content))
@@ -39,11 +39,12 @@ class EditSpeaker extends Component {
   handleDelete(event) {
     SpeakerService.deleteID(this.props.token,this.state.id);
     this.props.dispatch(deleteSpeaker(this.state.id));
+    this.props.dispatch(fetchTalks());
 
   }
 
   render() {
-    return(<div>
+    return(<div className='Talk'>
         Prénom: <input type='text' value={this.state.firstname} onChange={this.handleChange.bind(this,'firstname')} />
         <br/>
         Nom: <input type='text' value={this.state.lastname} onChange={this.handleChange.bind(this,'lastname')} />

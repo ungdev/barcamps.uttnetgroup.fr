@@ -105,7 +105,7 @@ export function updateBarcamp(barcamp){
 }
 
 export function deleteSpeaker(id){
-  return console.log("CC");
+  return {type: "RESET_FILTER", payload: 1};
 }
 
 export function updateSpeaker(speaker){

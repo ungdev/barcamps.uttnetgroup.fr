@@ -1,162 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTalks, addTalk } from '../actions'
-import BarcampService from '../services/BarcampService.js';
-import SpeakerService from '../services/SpeakerService.js';
-import TalkService from '../services/TalkService.js';
-import '../styles/Talk.css';
-
-const initialState = {
-  title: '',
-  description: '',
-  slides: null,
-  date:'',
-  barcamp_id: '',
-  speaker_id: '',
-  firstName: '',
-  lastName: '',
-  email: '',
-};
+import CreateTalk from './CreateTalk'
+import CreateBarcamp from './CreateBarcamp'
+import CreateSpeaker from './CreateSpeaker'
 
 class CreateForm extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentWillReceiveProps(nextProps){
-    this.setState(initialState);
-  }
-
-  handleClick(type,event){
-    let content = {};
-    switch (type) {
-      case "barcamp":
-        let date = new Date(this.state.date)
-        date = date.toISOString()
-        content = {
-          title: this.state.title,
-          description: this.state.description,
-          date: date};
-        BarcampService.post(this.props.token,content);
-        break;
-      case "talk":
-        content = {
-          title: this.state.title,
-          description: this.state.description,
-          barcamp_id: this.state.barcamp_id,
-          speaker_id: this.state.speaker_id,
-          slides: this.state.slides
-        };
-        TalkService.post(this.props.token,content);
-        content = {...content, id: this.props.lastTalk.id+1}
-        this.props.dispatch(addTalk(content))
-        break;
-      case "speaker":
-        content = {
-          firstname: this.state.firstName,
-          lastname: this.state.lastName,
-          email: this.state.email};
-        SpeakerService.post(this.props.token,content);
-        break;
-      default:
-    }
-    this.setState(initialState)
-  }
-
-  handleChange(type,event){
-      this.setState({[type]: event.target.value})
-  }
-
-  handleChangeID(type, event){
-    switch (type) {
-      case "speaker":
-        this.setState({speaker_id: event.target.value})
-        break;
-      case "barcamp":
-        this.setState({barcamp_id: event.target.value})
-        break;
-      default:
-
-    }
-  }
-
-  handleFile(event){
-    this.setState({slides: event.target.files[0]})
-  }
-
-  getListSpeakers() {
-    let speakers = this.props.speakers.map(s => {
-      return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
-    });
-    return(<select value={this.state.speaker_id} onChange={this.handleChangeID.bind(this,"speaker")}>
-      <option value=""> </option>
-      {speakers}
-    </select>)
-  }
-
-  getListBarcamps() {
-    let barcamps = this.props.barcamps.map(b => {
-      let event = new Date(b.date);
-      return  <option key={b.id} value={b.id}>{b.title} le {event.toLocaleDateString('fr-FR')}</option>
-    });
-    return (<select value={this.state.barcamp_id} onChange={this.handleChangeID.bind(this,"barcamp")}>
-      <option value=""> </option>
-      {barcamps}
-    </select>)
-  }
-
   render() {
     let form = '';
     switch (this.props.create) {
       case "barcamp":
-        form = <div>
-          <p>Création barcamp:</p>
-          <br/>
-          Titre: <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
-          <br/>
-          Description: <input type='text' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
-          <br/>
-          Date: <input type='date' value={this.state.date} onChange={this.handleChange.bind(this,'date')} />
-          <br/>
-          <button type='button' onClick={this.handleClick.bind(this,"barcamp")}>Ajouter</button>
-        </div>
+        form = <CreateBarcamp />
         break;
       case "talk":
-        form = <div>
-          <p>Création présentation:</p>
-          <br/>
-          Titre: <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
-          <br/>
-          Description: <input type='text' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
-          <br/>
-          Barcamp: {this.getListBarcamps()}
-          <br/>
-          Speaker: {this.getListSpeakers()}
-          <br/>
-          <input type='file' onChange={this.handleFile.bind(this)}/>
-          <br/>
-          <button type='button' onClick={this.handleClick.bind(this,"talk")}>Ajouter</button>
-        </div>
+        form = <CreateTalk />
         break;
       case "speaker":
-      form = <div>
-          <p>Création speaker:</p>
-          <br/>
-          Prénom: <input type='text' value={this.state.firstName} onChange={this.handleChange.bind(this,'firstName')} />
-          <br/>
-          Nom: <input type='text' value={this.state.lastName} onChange={this.handleChange.bind(this,'lastName')} />
-          <br/>
-          Email: <input type='text' value={this.state.email} onChange={this.handleChange.bind(this,'email')} />
-          <br/>
-          <button type='button' onClick={this.handleClick.bind(this,"speaker")}>Ajouter</button>
-        </div>
+      form = <CreateSpeaker />
         break;
       default:
         return form
     }
     return(
-      <div className='Talk'>
+      <div>
         {form}
       </div>
     )
@@ -165,11 +35,7 @@ class CreateForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    create: state.create.create,
-    token: state.admin.token,
-    barcamps: state.data.barcamps,
-    speakers: state.data.speakers,
-    lastTalk: state.data.talks[state.data.talks.length-1]
+    create: state.create.create
   };
 }
 
