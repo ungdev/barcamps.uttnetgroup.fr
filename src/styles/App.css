@@ -1,0 +1,46 @@
+.Background{
+  background-image: url('../media/pexels-photo-414727.jpeg');
+  background-size: cover;
+  display: block;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  height: 800px;
+  left: 0;
+  position: fixed;
+  top: -100px;
+  right: 0;
+  z-index: -1;
+}
+
+.Sidebar {
+  background: #fff;
+  color: #2397FF;
+  border: 0;
+  padding: 1em;
+  width: 20%;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+}
+
+.Content {
+  display: block;
+  padding: 1em;
+  margin-left: 25%;
+  color: #3d4f5d;
+}
+
+.Head {
+  padding: 1em;
+  color: white;
+}
+
+.Talks {
+  margin-top: 2em;
+}
+
+.DisplayAll {
+  cursor: pointer;
+  float: right;
+  margin-right: 1em;
+}
