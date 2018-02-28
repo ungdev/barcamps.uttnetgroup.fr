@@ -31,7 +31,8 @@ class EditTalk extends Component {
       title: this.state.title,
       description: this.state.description,
       barcamp_id: this.state.barcamp_id,
-      speaker_id: this.state.speaker_id
+      speaker_id: this.state.speaker_id,
+      slides: this.state.slides
     };
     TalkService.putID(this.props.token,this.state.id,content);
   }
@@ -43,7 +44,10 @@ class EditTalk extends Component {
   handleDelete(event) {
     TalkService.deleteID(this.props.token,this.state.id);
     this.props.dispatch(deleteTalk(this.state.id));
+  }
 
+  handleFile(event){
+    this.setState({slides: event.target.files[0]})
   }
 
   handleChangeID(type, event){
@@ -89,6 +93,8 @@ class EditTalk extends Component {
         Speaker: {this.getListSpeakers()}
         <br/>
         Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
+        <br/>
+        Slides: <input type='file' onChange={this.handleFile.bind(this)}/>
         <br/>
         <button type='button' onClick={this.handleClick.bind(this)}>Modifier</button>
         <button type ='button' onClick={this.handleDelete.bind(this)}>Supprimer</button>

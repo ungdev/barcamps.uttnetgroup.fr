@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Document, Page } from 'react-pdf';
 
 import { filter, apply } from '../actions'
 import '../styles/Talk.css';
@@ -22,34 +23,8 @@ class Talk extends Component {
     let event = new Date(talk.barcamp.date);
     let options = {year: 'numeric', month: 'long', day: 'numeric' };
     this.setState({date: event.toLocaleDateString('fr-FR', options)});
-  //  this.renderPDF(talk.slides);
-
   }
-
-  // URL à personnaliser pour votre propre utilisation
-  /*renderPDF(pdfUrl) {
-   PDFJS.getDocument(pdfUrl).then(function (pdf) {
-   pdf.getPage(1).then(function (page) {
-   var pdfPage = document.getElementById('pdf-page');
-   this.renderPDFPage(page, pdfPage);
-   });
-   return;
-   });
-  }
-
-  renderPDFPage(page, canvas) {
-   var scale = 1.5;
-   var viewport = page.getViewport(scale);
-   var context = canvas.getContext('2d');
-   canvas.height = viewport.height;
-   canvas.width = viewport.width;
-   var renderContext = {
-   canvasContext: context,
-   viewport: viewport
-   };
-   page.render(renderContext);
- } */
-
+  
   componentDidMount() {
     this.updateState(this.props.talk);
   }
@@ -68,8 +43,13 @@ class Talk extends Component {
 
   render() {
     return(<div className='Talk'>
-        <h1> {this.state.talk.title}
+        <h1 className='Title'> {this.state.talk.title}
         <a className="PDF" href={this.state.talk.slides} target="_blank">
+        <Document
+        file={this.state.talk.slides}
+      >
+        <Page pageNumber={1} scale={0.3} />
+      </Document>
         </a>
         </h1>
 

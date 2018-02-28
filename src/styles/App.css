@@ -44,3 +44,48 @@
   float: right;
   margin-right: 1em;
 }
+
+.Header {
+  margin-top: 40%;
+  margin-right: 2em;
+  text-align: right;
+}
+
+.Categories {
+  margin-top: 15%;
+  text-align: right;
+  list-style-type: none;
+}
+
+.Menu {
+  cursor: pointer;
+  position: fixed;
+  font-size: 2em;
+  margin: 2%;
+  color: white;
+  z-index: -2;
+}
+
+.Close {
+  cursor: pointer;
+  display: none;
+  float: right;
+  z-index: 0;
+  margin-right: 1%;
+}
+
+@media (max-width: 1245px) {
+  .Sidebar {
+    width: 0;
+    padding: 0;
+  }
+
+  .Menu {
+    z-index: 0;
+  }
+
+  .Content {
+    margin-left: 10%;
+  }
+
+}
