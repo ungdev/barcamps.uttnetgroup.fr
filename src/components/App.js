@@ -9,6 +9,13 @@ import '../styles/App.css';
 
 class App extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      style: null
+    }
+  }
+
   componentWillMount() {
     this.props.dispatch(fetchTalks());
     this.props.dispatch(fetchBarcamps());
@@ -16,25 +23,34 @@ class App extends Component {
   }
 
   openMenu(){
-    document.getElementById("Sidebar").style.width = "275px";
+    var ele = document.getElementById("Sidebar");
+    var style = window.getComputedStyle(ele,null).cssText;
+    console.log(style);
+    if (this.state.style === null) {
+      this.setState({style});
+    }
+    document.getElementById("Sidebar").style.left = "0px";
     document.getElementById("Sidebar").style.padding = "1em";
     document.getElementById("Close").style.display = "block";
     document.getElementById("Menu").style.display = "none";
   }
 
   closeMenu(){
+    document.getElementById("Close").style.display = "";
     document.getElementById("Menu").style.display = "block";
-    document.getElementById("Sidebar").style.width = "0";
-    document.getElementById("Sidebar").style.padding = "0";
+    document.getElementById("Sidebar").style.left = "";
+    document.getElementById("Sidebar").style.padding = "";
 
   }
 
 
   render() {
+
+
     return (
       <div>
         <div className = 'Background'></div>
-        <div id='Sidebar' className = 'Sidebar'>
+        <div className = 'Sidebar' id = 'Sidebar'>
           <a id="Close" className="Close" onClick={this.closeMenu.bind(this)}>&#9587;</a>
           <Admin />
           <Navbar />

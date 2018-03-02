@@ -24,7 +24,7 @@ class Talk extends Component {
     let options = {year: 'numeric', month: 'long', day: 'numeric' };
     this.setState({date: event.toLocaleDateString('fr-FR', options)});
   }
-  
+
   componentDidMount() {
     this.updateState(this.props.talk);
   }
