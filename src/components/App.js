@@ -11,9 +11,6 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      style: null
-    }
   }
 
   componentWillMount() {
@@ -23,12 +20,6 @@ class App extends Component {
   }
 
   openMenu(){
-    var ele = document.getElementById("Sidebar");
-    var style = window.getComputedStyle(ele,null).cssText;
-    console.log(style);
-    if (this.state.style === null) {
-      this.setState({style});
-    }
     document.getElementById("Sidebar").style.left = "0px";
     document.getElementById("Sidebar").style.padding = "1em";
     document.getElementById("Close").style.display = "block";
@@ -37,7 +28,7 @@ class App extends Component {
 
   closeMenu(){
     document.getElementById("Close").style.display = "";
-    document.getElementById("Menu").style.display = "block";
+    document.getElementById("Menu").style.display = "";
     document.getElementById("Sidebar").style.left = "";
     document.getElementById("Sidebar").style.padding = "";
 
