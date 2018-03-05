@@ -1,5 +1,3 @@
-import TalkService from '../services/TalkService';
-
 export default function reducer(state={
   talks: [],
   speakers: [],

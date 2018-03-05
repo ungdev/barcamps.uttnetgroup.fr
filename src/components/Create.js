@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import { create } from '../actions'
 import '../styles/App.css';
 
 class Create extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return(
       <ul>
@@ -20,9 +15,4 @@ class Create extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-  };
-}
-
-export default connect(mapStateToProps)(Create);
+export default Create;

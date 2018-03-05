@@ -1,9 +1,5 @@
 import Service from "./Service.js";
 
-class TalkService extends Service {
-  constructor(name) {
-    super(name);
-  }
-}
+class TalkService extends Service {}
 
 export default new TalkService('talk');

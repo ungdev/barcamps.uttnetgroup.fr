@@ -1,9 +1,5 @@
 import Service from "./Service.js";
 
-class BarcampService extends Service {
-  constructor(name) {
-    super(name);
-  }
-}
+class BarcampService extends Service {}
 
 export default new BarcampService('barcamp');

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTalks, addTalk } from '../actions'
 import SpeakerService from '../services/SpeakerService.js';
 import '../styles/Talk.css';
 
@@ -12,9 +11,6 @@ const initialState = {
 };
 
 class CreateSpeaker extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount(){
     this.setState(initialState);

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Talk from './Talk.js';
@@ -67,7 +66,7 @@ class DisplayTalks extends Component {
       if (this.props.admin.exist) {
         talks = this.props.talks.map(e => <EditTalk key={e.id} talk={e} />);
       }
-      else if (this.props.talks.length != 0) {
+      else if (this.props.talks.length !== 0) {
         talks = this.props.talks.map(e => <Talk key={e.id} talk={e} />);
       }
     }
@@ -81,7 +80,7 @@ class DisplayTalks extends Component {
     return (
       <div className='Content'>
         <div className='Head'>
-          <h1> {this.state.title} <a className='DisplayAll' onClick={() => this.props.dispatch(fetchTalks())}> Tous afficher </a> </h1>
+          <h1> {this.state.title} <a className='DisplayAll' onClick={() => this.props.dispatch(fetchTalks())}> Tout afficher </a> </h1>
           <a href={`mailto:${this.state.email}`}> {this.state.email} </a>
         </div>
         <div className='Talks'>

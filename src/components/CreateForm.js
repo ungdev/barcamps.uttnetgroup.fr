@@ -6,9 +6,6 @@ import CreateBarcamp from './CreateBarcamp'
 import CreateSpeaker from './CreateSpeaker'
 
 class CreateForm extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let form = '';

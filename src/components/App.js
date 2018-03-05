@@ -9,10 +9,6 @@ import '../styles/App.css';
 
 class App extends Component {
 
-  constructor(props){
-    super(props);
-  }
-
   componentWillMount() {
     this.props.dispatch(fetchTalks());
     this.props.dispatch(fetchBarcamps());

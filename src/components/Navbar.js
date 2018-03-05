@@ -28,11 +28,9 @@ class Navbar extends Component {
     var speakers = this.props.speakers.map(s => {
       return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
     });
-    var talks ="";
-    if (this.props.talks !== undefined) {
-      if (this.props.talks.length != 0 ){
-        talks = this.props.talks.map(t => <option key={t.id} value={t.id}>{t.title}</option>);
-      }
+    var talks = [];
+    if (this.props.talks) {
+      talks = this.props.talks.map(t => <option key={t.id} value={t.id}>{t.title}</option>)
     }
     return(
       <div>

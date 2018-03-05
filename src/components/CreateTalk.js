@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTalks, addTalk } from '../actions'
+import { addTalk } from '../actions'
 import TalkService from '../services/TalkService.js';
 import '../styles/Talk.css';
 
@@ -14,9 +14,6 @@ const initialState = {
 };
 
 class CreateTalk extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount(){
     this.setState(initialState);
