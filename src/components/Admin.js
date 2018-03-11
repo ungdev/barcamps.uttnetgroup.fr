@@ -31,7 +31,10 @@ class Admin extends Component {
     let admin = <div></div>
     if (this.props.admin.exist) {
       admin = <div><a> Connecté en tant que {this.props.admin.user.firstName} {this.props.admin.user.lastName} </a>
-        <Create /> </div>
+      if (this.props.admin.user.admin) {
+        admin += <Create />
+      }
+      admin += </div>
     } else {
       admin = <a className='Clickable' href= {this.state.oauth}> Connexion </a>
     }

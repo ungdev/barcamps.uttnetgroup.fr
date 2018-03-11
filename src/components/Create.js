@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { create } from '../actions'
 import '../styles/App.css';
@@ -15,4 +16,9 @@ class Create extends Component {
   }
 }
 
-export default Create;
+
+function mapStateToProps(state) {
+  return {
+  };
+}
+export default connect(mapStateToProps)(Create);
