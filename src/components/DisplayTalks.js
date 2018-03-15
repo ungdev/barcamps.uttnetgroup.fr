@@ -63,7 +63,7 @@ class DisplayTalks extends Component {
   render() {
     let talks ="";
     if (this.props.talks !== undefined) {
-      if (this.props.admin.exist) {
+      if (this.props.admin.user.admin) {
         talks = this.props.talks.map(e => <EditTalk key={e.id} talk={e} />);
       }
       else if (this.props.talks.length !== 0) {

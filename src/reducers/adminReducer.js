@@ -9,7 +9,7 @@ export default function reducer(state={
   switch (action.type) {
     case "ADD_USER":
       var user = jwt.decode(action.payload);
-      return {...state, token: action.payload, user}
+      return {...state, token: action.payload, user, exist: true}
     default:
       return state
   }
