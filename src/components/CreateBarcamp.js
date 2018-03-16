@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { create } from '../actions'
 import BarcampService from '../services/BarcampService.js';
 import '../styles/Talk.css';
 
@@ -26,7 +27,8 @@ class CreateBarcamp extends Component {
       date: date
       };
     BarcampService.post(this.props.token,content);
-    this.setState(initialState)
+    this.setState(initialState);
+    this.props.dispatch(create(""))
   }
 
   handleChange(type,event){

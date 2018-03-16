@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { create } from '../actions';
 import SpeakerService from '../services/SpeakerService.js';
 import '../styles/Talk.css';
 
@@ -23,7 +24,8 @@ class CreateSpeaker extends Component {
       lastname: this.state.lastName,
       email: this.state.email};
     SpeakerService.post(this.props.token,content);
-    this.setState(initialState)
+    this.setState(initialState);
+    this.props.dispatch(create(""))
   }
 
   handleChange(type,event){

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addTalk } from '../actions'
+import { addTalk, create } from '../actions'
 import TalkService from '../services/TalkService.js';
 import '../styles/Talk.css';
 
@@ -31,6 +31,7 @@ class CreateTalk extends Component {
     TalkService.post(this.props.token,content);
     content = {...content, id: this.props.lastTalk.id+1}
     this.props.dispatch(addTalk(content))
+    this.props.dispatch(create(""))
     this.setState(initialState)
   }
 
