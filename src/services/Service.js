@@ -1,16 +1,19 @@
 export default class Service {
   constructor(name) {
+    console.log(process.env)
     this.name = name;
   }
 
   get() {
-    return fetch(`https://api.barcamps.uttnetgroup.fr/api/${this.name}/?format=json`)
+    return fetch(`${process.env.REACT_APP_API_URI}${this.name}/?format=json`)
       .then(result => result.json())
+      .catch(err => console.log(err))
   }
 
   getID(id) {
-    return fetch(`https://api.barcamps.uttnetgroup.fr/api/${this.name}/${id}/?format=json`)
+    return fetch(`${process.env.REACT_APP_API_URI}${this.name}/${id}/?format=json`)
       .then(result => result.json())
+      .catch(err => console.log(err))
   }
 
   post(token, content){
@@ -25,7 +28,7 @@ export default class Service {
     });
     token = "Bearer " + token;
     var setting = {method: 'POST', headers: {"Authorization": token}, body: form}
-    fetch(`https://api.barcamps.uttnetgroup.fr/api/${this.name}/`,setting)
+    fetch(`${process.env.REACT_APP_API_URI}${this.name}/`,setting)
   }
 
   putID(token, id, content){
@@ -39,13 +42,13 @@ export default class Service {
     });
     token = "Bearer " + token;
     var setting = {method: 'PUT', headers: {"Authorization": token}, body: form}
-    fetch(`https://api.barcamps.uttnetgroup.fr/api/${this.name}/${id}/`,setting)
+    fetch(`${process.env.REACT_APP_API_URI}${this.name}/${id}/`,setting)
   }
 
   deleteID(token,id){
     token = "Bearer " + token;
     var setting = {method: 'DELETE', headers: {"Authorization": token}}
-    fetch(`https://api.barcamps.uttnetgroup.fr/api/${this.name}/${id}/`,setting)
+    fetch(`${process.env.REACT_APP_API_URI}${this.name}/${id}/`,setting)
   }
 
 }

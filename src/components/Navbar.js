@@ -21,17 +21,20 @@ class Navbar extends Component {
   }
 
   render() {
-    var barcamps = this.props.barcamps.map(b => {
-      var event = new Date(b.date);
-      return  <option key={b.id} value={b.id}>{b.title} le {event.toLocaleDateString('fr-FR')}</option>
-    });
-    var speakers = this.props.speakers.map(s => {
-      return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
-    });
-    var talks = [];
-    if (this.props.talks) {
-      talks = this.props.talks.map(t => <option key={t.id} value={t.id}>{t.title}</option>)
-    }
+    var barcamps = this.props.barcamps
+      ? this.props.barcamps.map(b => {
+          var event = new Date(b.date);
+          return  <option key={b.id} value={b.id}>{b.title} le {event.toLocaleDateString('fr-FR')}</option>
+        })
+      : []
+    var speakers = this.props.speakers
+      ? this.props.speakers.map(s => {
+          return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
+        })
+      : []
+    var talks = this.props.talks
+      ? this.props.talks.map(t => <option key={t.id} value={t.id}>{t.title}</option>)
+      : []
     return(
       <div>
         <div className='Header'>
