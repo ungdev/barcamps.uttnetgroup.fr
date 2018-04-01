@@ -1,7 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FormGroup, ControlLabel, FormControl, Grid, Row, Col, Glyphicon, Button } from 'react-bootstrap'
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Grid,
+  Row,
+  Col,
+  Glyphicon,
+  Button,
+  Dropdown,
+  MenuItem} from 'react-bootstrap'
 
+import OauthService from '../services/OauthService'
+import { addUser } from '../actions'
 import { filter, apply } from '../actions'
 import '../styles/App.css'
 
@@ -10,8 +22,23 @@ class Menu extends Component {
   constructor() {
     super();
     this.state = {
+      oauth: "",
       barcamps: [],
       speakers: []
+    }
+  }
+
+  componentDidMount() {
+    OauthService.get()
+      .then(oauth => {this.setState({oauth});return oauth})
+    let codes = window.location.search.split(/=|&/);
+    let authorization_code = codes[1];
+    if (authorization_code !== undefined) {
+      let form = new FormData();
+      form.append("authorization_code", authorization_code);
+      fetch("https://api.barcamps.uttnetgroup.fr/api/oauth/token/", {method: 'POST', body: form })
+        .then(response => response.json())
+        .then(response => this.props.dispatch(addUser(response)));
     }
   }
 
@@ -34,6 +61,28 @@ class Menu extends Component {
     );
   }
 
+  getMenu() {
+    if (this.props.admin.exist) {
+      return (
+         <Dropdown.Menu>
+        <MenuItem eventKey="1">Ajouter Présentation</MenuItem>
+        <MenuItem eventKey="2">Ajouter Barcamp</MenuItem>
+        <MenuItem eventKey="3">
+          Ajouter Speaker
+        </MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey="4">Deconnexion</MenuItem>
+         </Dropdown.Menu>
+      )
+    } else {
+      return (
+         <Dropdown.Menu>
+        <MenuItem eventKey="1" href= {this.state.oauth}>Connexion</MenuItem>
+         </Dropdown.Menu>
+      )
+    }
+  }
+
   render() {
     var barcamps = this.props.barcamps
       ? this.props.barcamps.map(b => {
@@ -53,9 +102,12 @@ class Menu extends Component {
     return(
       <div className='Navbar'>
         <h1 className='Navbar'> BARCAMPS
-        <Button className='Login'>
-          <Glyphicon glyph="user" />
-        </Button>
+          <Dropdown className="Login" pullRight>
+           <Dropdown.Toggle>
+             <Glyphicon glyph="user" />
+           </Dropdown.Toggle>
+             {this.getMenu()}
+         </Dropdown>
         </h1>
         <Grid>
           <Row className="show-grid">
@@ -80,7 +132,8 @@ function mapStateToProps(state) {
     talks: state.data.talks,
     filter: state.filter.filter,
     barcamps: state.data.barcamps,
-    speakers: state.data.speakers
+    speakers: state.data.speakers,
+    admin: state.admin
   };
 }
 
