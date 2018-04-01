@@ -43,22 +43,18 @@ class Talk extends Component {
 
   render() {
     return(<div className='Talk'>
-        <h1 className='Title'> {this.state.talk.title}
-        <a className="PDF" href={this.state.talk.slides} target="_blank">
-        <Document
-        file={this.state.talk.slides}
-      >
-        <Page pageNumber={1} scale={0.3} />
-      </Document>
-        </a>
-        </h1>
-
-        <p>
-          <a className='Clickable' onClick={this.handleClick.bind(this,"barcamp",this.state.talk.barcamp_id)}> {this.state.talk.barcamp.title} </a>
-          par <a className='Clickable' onClick={this.handleClick.bind(this,"speaker",this.state.talk.speaker_id)}> {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </a>
-          le {this.state.date}
-          <p> {this.state.talk.description} </p>
-        </p>
+        <h1 className='Title'>
+          {this.state.talk.title}
+          <a className="PDF" href={this.state.talk.slides} target="_blank">
+            <Document file={this.state.talk.slides}>
+              <Page pageNumber={1} scale={0.3} />
+            </Document>
+          </a>
+        </h1>  
+        <p> {this.state.talk.description} </p>
+        <div className='Description'>
+          Par <a className='Clickable' onClick={this.handleClick.bind(this,"speaker",this.state.talk.speaker_id)}> {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </a>
+        </div>
       </div>
     )
   }

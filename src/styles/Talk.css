@@ -1,12 +1,12 @@
 .Talk {
-  background: white;
-  border-radius: 3px;
-  padding: 1em;
-  margin: 3em;
-  top: auto;
-  margin-left: 0;
-  margin-right: 10%;
-  color: #2397FF;
+  border-color: #707070;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  color: #88C4F9;
+  width: 95%;
+  height: 250px;
+  margin: 2em;
 }
 
 .PDF {
@@ -14,5 +14,11 @@
 }
 
 .Title {
-  color: #000;
+  color: #707070;
+  font-size: 2em;
+}
+
+.Description {
+  position: absolute;
+  bottom: 3em;
 }

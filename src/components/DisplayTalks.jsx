@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 import Talk from './Talk.js';
 import CreateForm from './CreateForm';
@@ -60,16 +61,22 @@ class DisplayTalks extends Component {
     }
   }
 
-  render() {
-    let talks ="";
-    if (this.props.talks !== undefined) {
+  showTalks() {
       if (this.props.admin.user.admin) {
-        talks = this.props.talks.map(e => <EditTalk key={e.id} talk={e} />);
+        return this.props.talks.map(e => <Col sm={12} md={6}>
+          <EditTalk key={e.id} talk={e} />
+        </Col>);
       }
       else if (this.props.talks.length !== 0) {
-        talks = this.props.talks.map(e => <Talk key={e.id} talk={e} />);
+        return this.props.talks.map(e => <Col sm={12} md={6}>
+          <Talk key={e.id} talk={e} />
+        </Col>);
       }
-    }
+  }
+
+  render() {
+    let talks = this.props.talks ? this.showTalks()
+    : [];
     let edit = "";
     if (this.props.filter[0] !== "" && this.props.admin.exist){
       edit = <EditBarcamp barcamp={this.state.barcamp}/>
@@ -78,17 +85,17 @@ class DisplayTalks extends Component {
     }
 
     return (
-      <div className='Content'>
-        <div className='Head'>
-          <h1> {this.state.title} <a className='DisplayAll' onClick={() => this.props.dispatch(fetchTalks())}> Tout afficher </a> </h1>
-          <a href={`mailto:${this.state.email}`}> {this.state.email} </a>
-        </div>
-        <div className='Talks'>
+        <div>
           <CreateForm />
           {edit}
-          {talks}
+          <Grid>
+            <Row className="show-grid">
+              <div className ='Talks'>
+              {talks}
+              </div>
+            </Row>
+          </Grid>
         </div>
-      </div>
     );
   }
 
