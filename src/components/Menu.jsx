@@ -13,8 +13,7 @@ import {
   MenuItem} from 'react-bootstrap'
 
 import OauthService from '../services/OauthService'
-import { addUser } from '../actions'
-import { filter, apply } from '../actions'
+import { filter, apply, addUser, create } from '../actions'
 import '../styles/App.css'
 
 class Menu extends Component {
@@ -64,15 +63,15 @@ class Menu extends Component {
   getMenu() {
     if (this.props.admin.exist) {
       return (
-         <Dropdown.Menu>
-        <MenuItem eventKey="1">Ajouter Présentation</MenuItem>
-        <MenuItem eventKey="2">Ajouter Barcamp</MenuItem>
-        <MenuItem eventKey="3">
-          Ajouter Speaker
-        </MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey="4">Deconnexion</MenuItem>
-         </Dropdown.Menu>
+       <Dropdown.Menu>
+          <MenuItem eventKey="1" onClick={() => {this.props.dispatch(create("talk"))}}>Ajouter Présentation</MenuItem>
+          <MenuItem eventKey="2" onClick={() => {this.props.dispatch(create("barcamp"))}}>Ajouter Barcamp</MenuItem>
+          <MenuItem eventKey="3" onClick={() => {this.props.dispatch(create("speaker"))}}>
+            Ajouter Speaker
+          </MenuItem>
+          <MenuItem divider />
+          <MenuItem eventKey="4">Deconnexion</MenuItem>
+       </Dropdown.Menu>
       )
     } else {
       return (

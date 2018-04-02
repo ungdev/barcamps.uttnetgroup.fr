@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button} from 'react-bootstrap'
 
 import { addTalk, create } from '../actions'
 import TalkService from '../services/TalkService.js';
@@ -79,9 +80,44 @@ class CreateTalk extends Component {
 
   render() {
     return(
-      <div className='Talk'>
-        <p>Création présentation:</p>
+      <div>
+        <h1 className='Title'>Création présentation:</h1>
         <br/>
+        <Form horizontal>
+          <FormGroup controlId="formHorizontalEmail">
+            <Col componentClass={ControlLabel} sm={2}>
+              Titre
+            </Col>
+            <Col sm={8}>
+              <FormControl type="text" value={this.state.title} onChange={this.handleChange.bind(this,'title')} placeholder="Titre" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Description
+            </Col>
+            <Col sm={8}>
+              <FormControl type="text" value={this.state.description} onChange={this.handleChange.bind(this,'description')} placeholder="Description" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Barcamp
+            </Col>
+            <Col sm={8}>
+              <FormControl componentClass="select" placeholder="select"/>
+              {this.getListBarcamps()}
+            </Col>
+          </FormGroup>
+
+          <FormGroup>
+            <Col smOffset={2} sm={10}>
+              <Button type="submit">Ajouter</Button>
+            </Col>
+          </FormGroup>
+        </Form>
         Titre: <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
         <br/>
         Description: <input type='text' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />

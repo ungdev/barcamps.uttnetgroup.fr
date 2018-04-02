@@ -5,8 +5,24 @@
   padding: 10px;
   color: #88C4F9;
   width: 95%;
-  height: 250px;
+  height: 200px;
   margin: 2em;
+}
+
+.CreateForm {
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-top: 2%;
+  padding: 10px;
+  color: #88C4F9;
+  border-color: #707070;
+  border-style: solid;
+  border-width: 1px;
+}
+
+h1.CreateForm {
+  color: #707070;
+  font-size: 2em;
 }
 
 .PDF {

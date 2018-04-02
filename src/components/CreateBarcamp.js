@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button} from 'react-bootstrap'
 
 import { create } from '../actions'
 import BarcampService from '../services/BarcampService.js';
@@ -37,16 +38,43 @@ class CreateBarcamp extends Component {
 
   render() {
     return(
-      <div className='Talk'>
-        <p>Création barcamp:</p>
+      <div>
+        <h1 className='Title'>Création barcamp:</h1>
         <br/>
-        Titre: <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
-        <br/>
-        Description: <input type='text' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
-        <br/>
-        Date: <input type='date' value={this.state.date} onChange={this.handleChange.bind(this,'date')} />
-        <br/>
-        <button type='button' onClick={this.handleClick.bind(this,"barcamp")}>Ajouter</button>
+        <Form horizontal>
+          <FormGroup controlId="formHorizontalEmail">
+            <Col componentClass={ControlLabel} sm={2}>
+              Titre
+            </Col>
+            <Col sm={8}>
+              <FormControl type="text" value={this.state.title} onChange={this.handleChange.bind(this,'title')} placeholder="Titre" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Description
+            </Col>
+            <Col sm={8}>
+              <FormControl type="text" value={this.state.description} onChange={this.handleChange.bind(this,'description')} placeholder="Description" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Date
+            </Col>
+            <Col sm={8}>
+              <FormControl type="date" value={this.state.date} onChange={this.handleChange.bind(this,'date')} placeholder="Date" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup>
+            <Col smOffset={2} sm={10}>
+              <Button type="submit">Ajouter</Button>
+            </Col>
+          </FormGroup>
+        </Form>
       </div>
     )
   }

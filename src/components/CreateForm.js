@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CreateTalk from './CreateTalk'
 import CreateBarcamp from './CreateBarcamp'
 import CreateSpeaker from './CreateSpeaker'
+import '../styles/Talk.css'
 
 class CreateForm extends Component {
 
@@ -23,7 +24,7 @@ class CreateForm extends Component {
         return form
     }
     return(
-      <div>
+      <div className='CreateForm'>
         {form}
       </div>
     )

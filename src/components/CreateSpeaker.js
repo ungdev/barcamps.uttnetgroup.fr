@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button} from 'react-bootstrap'
 
 import { create } from '../actions';
 import SpeakerService from '../services/SpeakerService.js';
@@ -34,16 +35,43 @@ class CreateSpeaker extends Component {
 
   render() {
     return(
-      <div className='Talk'>
-        <p>Création speaker:</p>
+      <div>
+        <h1 className='Title'>Création speaker:</h1>
         <br/>
-        Prénom: <input type='text' value={this.state.firstName} onChange={this.handleChange.bind(this,'firstName')} />
-        <br/>
-        Nom: <input type='text' value={this.state.lastName} onChange={this.handleChange.bind(this,'lastName')} />
-        <br/>
-        Email: <input type='text' value={this.state.email} onChange={this.handleChange.bind(this,'email')} />
-        <br/>
-        <button type='button' onClick={this.handleClick.bind(this)}>Ajouter</button>
+        <Form horizontal>
+          <FormGroup controlId="formHorizontalEmail">
+            <Col componentClass={ControlLabel} sm={2}>
+              Prénom
+            </Col>
+            <Col sm={8}>
+              <FormControl type="text" value={this.state.firstName} onChange={this.handleChange.bind(this,'firstName')} placeholder="Prénom" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Nom
+            </Col>
+            <Col sm={8}>
+              <FormControl type="text" value={this.state.lastName} onChange={this.handleChange.bind(this,'lastName')} placeholder="Nom" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Email
+            </Col>
+            <Col sm={8}>
+              <FormControl type="email" value={this.state.email} onChange={this.handleChange.bind(this,'email')} placeholder="Email" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup>
+            <Col smOffset={2} sm={10}>
+              <Button type="submit">Ajouter</Button>
+            </Col>
+          </FormGroup>
+        </Form>
       </div>
     )
   }
