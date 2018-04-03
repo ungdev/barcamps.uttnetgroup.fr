@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { fetchTalks, fetchBarcamps, fetchSpeakers } from '../actions';
 import Menu from './Menu.jsx';
 import DisplayTalks from './DisplayTalks.jsx';
-import Admin from './Admin.js';
 import '../styles/App.css';
 
 class App extends Component {

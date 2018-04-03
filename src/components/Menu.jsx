@@ -8,7 +8,6 @@ import {
   Row,
   Col,
   Glyphicon,
-  Button,
   Dropdown,
   MenuItem} from 'react-bootstrap'
 

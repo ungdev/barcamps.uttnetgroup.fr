@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import CreateTalk from './CreateTalk'
-import CreateBarcamp from './CreateBarcamp'
-import CreateSpeaker from './CreateSpeaker'
+import CreateTalk from './CreateTalk.jsx'
+import CreateBarcamp from './CreateBarcamp.jsx'
+import CreateSpeaker from './CreateSpeaker.jsx'
 import '../styles/Talk.css'
 
 class CreateForm extends Component {
