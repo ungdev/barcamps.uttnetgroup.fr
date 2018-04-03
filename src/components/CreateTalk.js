@@ -58,24 +58,16 @@ class CreateTalk extends Component {
   }
 
   getListSpeakers() {
-    let speakers = this.props.speakers.map(s => {
+    return this.props.speakers.map(s => {
       return  <option key={s.id} value={s.id}>Par {s.firstname} {s.lastname}</option>
     });
-    return(<select value={this.state.speaker_id} onChange={this.handleChangeID.bind(this,"speaker")}>
-      <option value=""> </option>
-      {speakers}
-    </select>)
   }
 
   getListBarcamps() {
-    let barcamps = this.props.barcamps.map(b => {
+    return this.props.barcamps.map(b => {
       let event = new Date(b.date);
       return  <option key={b.id} value={b.id}>{b.title} le {event.toLocaleDateString('fr-FR')}</option>
     });
-    return (<select value={this.state.barcamp_id} onChange={this.handleChangeID.bind(this,"barcamp")}>
-      <option value=""> </option>
-      {barcamps}
-    </select>)
   }
 
   render() {
@@ -107,8 +99,20 @@ class CreateTalk extends Component {
               Barcamp
             </Col>
             <Col sm={8}>
-              <FormControl componentClass="select" placeholder="select"/>
-              {this.getListBarcamps()}
+                <FormControl componentClass="select" placeholder="select">
+                  {this.getListBarcamps()}
+                </FormControl>
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Speaker
+            </Col>
+            <Col sm={8}>
+                <FormControl componentClass="select" placeholder="select">
+                  {this.getListSpeakers()}
+                </FormControl>
             </Col>
           </FormGroup>
 
@@ -118,17 +122,7 @@ class CreateTalk extends Component {
             </Col>
           </FormGroup>
         </Form>
-        Titre: <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} />
-        <br/>
-        Description: <input type='text' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
-        <br/>
-        Barcamp: {this.getListBarcamps()}
-        <br/>
-        Speaker: {this.getListSpeakers()}
-        <br/>
-        <input type='file' onChange={this.handleFile.bind(this)}/>
-        <br/>
-        <button type='button' onClick={this.handleClick.bind(this,"talk")}>Ajouter</button>
+        
       </div>
     )
   }

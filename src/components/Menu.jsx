@@ -61,7 +61,7 @@ class Menu extends Component {
   }
 
   getMenu() {
-    if (this.props.admin.exist) {
+    if (true) {
       return (
        <Dropdown.Menu>
           <MenuItem eventKey="1" onClick={() => {this.props.dispatch(create("talk"))}}>Ajouter Présentation</MenuItem>
