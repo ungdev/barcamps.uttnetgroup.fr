@@ -100,7 +100,7 @@ class Menu extends Component {
 
     return(
       <div className='Navbar'>
-        <h1 className='Navbar'> BARCAMPS
+        <h1 className='Navbar'> B A R C A M P S
           <Dropdown className="Login" pullRight>
            <Dropdown.Toggle>
              <Glyphicon glyph="user" />
@@ -108,8 +108,8 @@ class Menu extends Component {
              {this.getMenu()}
          </Dropdown>
         </h1>
-        <Grid>
-          <Row className="show-grid">
+        <Grid fluid className='Selection'>
+          <Row>
             <Col xs={6} sm={4}>
               {this.fieldSelection(barcamps,'Barcamps:')}
             </Col>

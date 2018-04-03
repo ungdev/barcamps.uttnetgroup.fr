@@ -88,11 +88,9 @@ class DisplayTalks extends Component {
         <div>
           <CreateForm />
           {edit}
-          <Grid>
-            <Row className="show-grid">
-              <div className ='Talks'>
+          <Grid fluid className ='Talks'>
+            <Row>
               {talks}
-              </div>
             </Row>
           </Grid>
         </div>
