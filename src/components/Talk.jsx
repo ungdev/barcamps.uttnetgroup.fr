@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Document, Page } from 'react-pdf';
+import { OverlayTrigger,Popover, Button} from 'react-bootstrap'
 
 import { filter, apply } from '../actions'
 import '../styles/Talk.css';
+
+const popoverTop = (
+<Popover id="popover-positioned-top" title="Popover top">
+  <strong>Holy guacamole!</strong> Check this info.
+</Popover>
+);
 
 class Talk extends Component {
 
@@ -50,10 +57,12 @@ class Talk extends Component {
               <Page pageNumber={1} scale={0.3} />
             </Document>
           </a>
-        </h1>  
+        </h1>
         <p> {this.state.talk.description} </p>
         <div className='Description'>
-          Par <a className='Clickable' onClick={this.handleClick.bind(this,"speaker",this.state.talk.speaker_id)}> {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </a>
+        <OverlayTrigger trigger={['hover', 'focus','click']} placement="top" overlay={popoverTop}>
+          <Button bsStyle="link"> Par {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </Button>
+        </OverlayTrigger>
         </div>
       </div>
     )
