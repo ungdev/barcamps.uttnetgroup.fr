@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Document, Page } from 'react-pdf';
-import { OverlayTrigger,Popover, Button} from 'react-bootstrap'
+import { Overlay,Popover, Button} from 'react-bootstrap'
 
 import { filter, apply } from '../actions'
 import '../styles/Talk.css';
 
-const popoverTop = (
-<Popover id="popover-positioned-top" title="Popover top">
-  <strong>Holy guacamole!</strong> Check this info.
-</Popover>
-);
+
 
 class Talk extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      show: false,
       talk: {
         barcamp: {},
         speaker: {}
@@ -49,6 +47,7 @@ class Talk extends Component {
   }
 
   render() {
+
     return(<div className='Talk'>
         <h1 className='Title'>
           {this.state.talk.title}
@@ -60,9 +59,17 @@ class Talk extends Component {
         </h1>
         <p> {this.state.talk.description} </p>
         <div className='Description'>
-        <OverlayTrigger trigger={['hover', 'focus','click']} placement="top" overlay={popoverTop}>
-          <Button bsStyle="link"> Par {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname} </Button>
-        </OverlayTrigger>
+        <Button bsStyle="link"  onMouseOver={() =>this.setState({show: true})} ref={button => {
+            this.target = button;
+          }}>
+          Par {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname}
+        </Button>
+        <Overlay trigger={['hover']} placement="top" show={this.state.show} target={() => ReactDOM.findDOMNode(this.target)}>
+          <Popover id="popover-positioned-top" title="Profil" onMouseOver={() => this.setState({show: true})}
+                                      onMouseLeave={() =>this.setState({show: false})} >
+            <strong>Liste barcamps</strong> A remplir.
+          </Popover>
+        </Overlay>
         </div>
       </div>
     )
