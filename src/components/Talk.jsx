@@ -6,6 +6,7 @@ import { Overlay,Popover, Button} from 'react-bootstrap'
 
 import { filter, apply } from '../actions'
 import '../styles/Talk.css';
+import SpeakerInfo from './SpeakerInfo.jsx'
 
 
 
@@ -51,15 +52,15 @@ class Talk extends Component {
     return(<div className='Talk'>
         <h1 className='Title'>
           {this.state.talk.title}
-          <a className="PDF" href={this.state.talk.slides} target="_blank">
+          {/*s<a className="PDF" href={this.state.talk.slides} target="_blank">
             <Document file={this.state.talk.slides}>
               <Page pageNumber={1} scale={0.3} />
             </Document>
-          </a>
+          </a>*/}
         </h1>
         <p> {this.state.talk.description} </p>
         <div className='Description'>
-        <Button bsStyle="link"  onMouseOver={() =>this.setState({show: true})} ref={button => {
+        <Button bsStyle="link" onMouseOver={() =>this.setState({show: true})} onMouseOut={() =>this.setState({show: false})} ref={button => {
             this.target = button;
           }}>
           Par {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname}
@@ -67,7 +68,7 @@ class Talk extends Component {
         <Overlay trigger={['hover']} placement="top" show={this.state.show} target={() => ReactDOM.findDOMNode(this.target)}>
           <Popover id="popover-positioned-top" title="Profil" onMouseOver={() => this.setState({show: true})}
                                       onMouseLeave={() =>this.setState({show: false})} >
-            <strong>Liste barcamps</strong> A remplir.
+            <SpeakerInfo speaker={this.state.talk.speaker}/>
           </Popover>
         </Overlay>
         </div>
