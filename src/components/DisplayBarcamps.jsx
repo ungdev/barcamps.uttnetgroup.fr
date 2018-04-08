@@ -14,13 +14,23 @@ import '../styles/App.css'
 
 class DisplayBarcamps extends Component {
 
-  showBarcamps() {
-    console.log('tubzgirezjgbifdsvncgd');
-      return this.props.barcamps.map((barcamp) => {
-        <div><h2>{barcamp.title}</h2>
-        <DisplayTalks talks = {barcamp.talks}/></div>
+  constructor(){
+    super();
+    this.state = {
+      barcamps: 'ISSOU'
+    }
+  }
 
-      })
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let barcamps =nextProps.barcamps
+  }
+
+  showBarcamps() {
+      return this.props.barcamps.map((barcamp) =>
+        <div><h2 className='Barcamp'>{barcamp.title}</h2>
+        <hr width="78%" color="grey"/>
+        <DisplayTalks talks = {barcamp.talks}/></div>
+      );
   }
 
   render() {
@@ -29,8 +39,7 @@ class DisplayBarcamps extends Component {
 
     return (
         <div>
-          issous
-          {this.showBarcamps()}
+          {barcamps}
         </div>
     );
   }

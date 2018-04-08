@@ -15,24 +15,8 @@ class Talk extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
-      talk: {
-        barcamp: {},
-        speaker: {}
-      },
-      date: ""
+      show: false
     }
-  }
-
-  updateState(talk) {
-    this.setState({talk});
-    let event = new Date(talk.barcamp.date);
-    let options = {year: 'numeric', month: 'long', day: 'numeric' };
-    this.setState({date: event.toLocaleDateString('fr-FR', options)});
-  }
-
-  componentDidMount() {
-    this.updateState(this.props.talk);
   }
 
   componentWillReceiveProps(nextProps){
@@ -51,24 +35,24 @@ class Talk extends Component {
 
     return(<div className='Talk'>
         <h1 className='Title'>
-          {this.state.talk.title}
+          {this.props.talk.title}
           {/*s<a className="PDF" href={this.state.talk.slides} target="_blank">
             <Document file={this.state.talk.slides}>
               <Page pageNumber={1} scale={0.3} />
             </Document>
           </a>*/}
         </h1>
-        <p> {this.state.talk.description} </p>
+        <p> {this.props.talk.description} </p>
         <div className='Description'>
         <Button bsStyle="link" onMouseOver={() =>this.setState({show: true})} onMouseOut={() =>this.setState({show: false})} ref={button => {
             this.target = button;
           }}>
-          Par {this.state.talk.speaker.firstname} {this.state.talk.speaker.lastname}
+          Par {this.props.talk.speaker.firstname} {this.props.talk.speaker.lastname}
         </Button>
         <Overlay trigger={['hover']} placement="top" show={this.state.show} target={() => ReactDOM.findDOMNode(this.target)}>
           <Popover id="popover-positioned-top" title="Profil" onMouseOver={() => this.setState({show: true})}
                                       onMouseLeave={() =>this.setState({show: false})} >
-            <SpeakerInfo speaker={this.state.talk.speaker}/>
+            <SpeakerInfo speaker={this.props.talk.speaker}/>
           </Popover>
         </Overlay>
         </div>

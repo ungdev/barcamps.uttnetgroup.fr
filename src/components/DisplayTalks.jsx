@@ -28,14 +28,9 @@ class DisplayTalks extends Component {
   }
 
   render() {
-    let talks = this.props.talks ? this.showTalks()
+     let talks = this.props.talks ? this.showTalks()
     : [];
     let edit = "";
-    if (this.props.filter[0] !== "" && this.props.admin.exist){
-      edit = <EditBarcamp barcamp={this.state.barcamp}/>
-    } else if (this.props.filter[1] !== ""  && this.props.admin.exist) {
-      edit = <EditSpeaker speaker={this.state.speaker}/>
-    }
 
     return (
         <div>
