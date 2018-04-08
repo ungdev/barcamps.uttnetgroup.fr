@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { fetchTalks, fetchBarcamps, fetchSpeakers } from '../actions';
 import Menu from './Menu.jsx';
-import DisplayTalks from './DisplayTalks.jsx';
+import DisplayBarcamps from './DisplayBarcamps.jsx';
 import '../styles/App.css';
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div>
         <Menu />
-        <DisplayTalks />
+        <DisplayBarcamps />
       </div>
     );
   }
