@@ -3,13 +3,7 @@ import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 import Talk from './Talk.jsx';
-import CreateForm from './CreateForm.jsx';
 import EditTalk from './EditTalk.jsx';
-import EditBarcamp from './EditBarcamp.jsx'
-import EditSpeaker from './EditSpeaker.jsx'
-import BarcampService from '../services/BarcampService.js';
-import SpeakerService from '../services/SpeakerService.js';
-//import { fetchTalks } from '../actions/index'
 import '../styles/App.css'
 
 class DisplayTalks extends Component {
@@ -34,7 +28,6 @@ class DisplayTalks extends Component {
 
     return (
         <div>
-          <CreateForm />
           {edit}
           <Grid fluid className ='Talks'>
             <Row>

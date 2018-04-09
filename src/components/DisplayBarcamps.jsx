@@ -1,17 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Talk from './Talk.jsx';
 import CreateForm from './CreateForm.jsx';
-import EditTalk from './EditTalk.jsx';
-import EditBarcamp from './EditBarcamp.jsx'
-import EditSpeaker from './EditSpeaker.jsx'
-import BarcampService from '../services/BarcampService.js';
-import SpeakerService from '../services/SpeakerService.js';
 import DisplayTalks from './DisplayTalks.jsx'
 //import { fetchTalks } from '../actions/index'
 import '../styles/App.css'
-
 class DisplayBarcamps extends Component {
 
   constructor(){
@@ -19,10 +12,6 @@ class DisplayBarcamps extends Component {
     this.state = {
       barcamps: 'ISSOU'
     }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    let barcamps =nextProps.barcamps
   }
 
   showBarcamps() {
@@ -39,6 +28,7 @@ class DisplayBarcamps extends Component {
 
     return (
         <div>
+          <CreateForm />
           {barcamps}
         </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { Document, Page } from 'react-pdf';
+//import { Document, Page } from 'react-pdf';
 import { Overlay,Popover, Button} from 'react-bootstrap'
 
 import { filter, apply } from '../actions'
@@ -17,10 +17,6 @@ class Talk extends Component {
     this.state = {
       show: false
     }
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.updateState(nextProps.talk);
   }
 
   handleClick(type,id) {
