@@ -9,7 +9,8 @@ import {
   Col,
   Glyphicon,
   Dropdown,
-  MenuItem} from 'react-bootstrap'
+  MenuItem,
+  Navbar} from 'react-bootstrap'
 
 import OauthService from '../services/OauthService'
 import { filter, apply, addUser, create } from '../actions'
@@ -98,15 +99,17 @@ class Menu extends Component {
       : []
 
     return(
-      <div className='Navbar'>
-        <h1 className='Navbar'> B A R C A M P S
-          <Dropdown className="Login" pullRight>
-           <Dropdown.Toggle>
-             <Glyphicon glyph="user" />
-           </Dropdown.Toggle>
-             {this.getMenu()}
-         </Dropdown>
-        </h1>
+      <div>
+        <Navbar fixedTop = 'true' fluid='true' className="MenuBack">
+          <h1 className='Navbar'> B A R C A M P S
+            <Dropdown className="Login" pullRight>
+             <Dropdown.Toggle>
+               <Glyphicon glyph="user" />
+             </Dropdown.Toggle>
+               {this.getMenu()}
+           </Dropdown>
+          </h1>
+        </Navbar>
         <Grid fluid className='Selection'>
           <Row>
             <Col xs={6} sm={4}>

@@ -61,6 +61,7 @@ a:hover.DisplayAll {
 .Selection {
   margin-left: 10%;
   margin-right: 10%;
+  margin-top: 80px;
 }
 
 .Barcamp {
@@ -71,4 +72,8 @@ a:hover.DisplayAll {
 
 hr {
   border-width: 2px;
+}
+
+.MenuBack {
+  background-color: #88C4F9
 }

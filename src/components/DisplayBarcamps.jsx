@@ -7,19 +7,13 @@ import DisplayTalks from './DisplayTalks.jsx'
 import '../styles/App.css'
 class DisplayBarcamps extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      barcamps: 'ISSOU'
-    }
-  }
-
   showBarcamps() {
-      return this.props.barcamps.map((barcamp) =>
-        <div><h2 className='Barcamp'>{barcamp.title}</h2>
+      return this.props.barcamps.map((barcamp) =>{
+        const date = new Date(barcamp.date)
+        return (<div><h2 className='Barcamp'>{barcamp.title} le {date.toLocaleDateString()}</h2>
         <hr width="78%" color="grey"/>
-        <DisplayTalks talks = {barcamp.talks}/></div>
-      );
+        <DisplayTalks talks = {barcamp.talks}/></div>)
+      });
   }
 
   render() {
