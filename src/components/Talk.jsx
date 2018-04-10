@@ -29,6 +29,8 @@ class Talk extends Component {
 
   render() {
 
+    const speakerData = this.props.speakers.filter(s => s.id === this.props.talk.speaker.id);
+
     return(<div className='Talk'>
         <h1 className='Title'>
           {this.props.talk.title}
@@ -47,8 +49,8 @@ class Talk extends Component {
         </Button>
         <Overlay trigger={['hover']} placement="top" show={this.state.show} target={() => ReactDOM.findDOMNode(this.target)}>
           <Popover id="popover-positioned-top" title="Profil" onMouseOver={() => this.setState({show: true})}
-                                      onMouseLeave={() =>this.setState({show: false})} >
-            <SpeakerInfo speaker={this.props.talk.speaker}/>
+                                      onMouseLeave={() => this.setState({show: false})} >
+            <SpeakerInfo speaker={speakerData[0]}/>
           </Popover>
         </Overlay>
         </div>
@@ -61,7 +63,8 @@ class Talk extends Component {
 function mapStateToProps(state) {
   return {
     filter : state.filter.filter,
-    admin : state.admin
+    admin : state.admin,
+    speakers : state.data.speakers
   };
 }
 
