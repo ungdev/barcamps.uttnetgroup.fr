@@ -15,6 +15,6 @@ class SpeakerInfo extends Component {
       </div>
     )
   }
-
 }
+
 export default SpeakerInfo;

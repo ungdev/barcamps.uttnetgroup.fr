@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, FormGroup, Col, FormControl, ControlLabel, Button} from 'react-bootstrap'
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button, FieldGroup} from 'react-bootstrap'
 
 import { addTalk, create } from '../actions'
 import TalkService from '../services/TalkService.js';
@@ -76,7 +76,7 @@ class CreateTalk extends Component {
         <h1 className='Title'>Création présentation:</h1>
         <br/>
         <Form horizontal>
-          <FormGroup controlId="formHorizontalEmail">
+          <FormGroup controlId="formHorizontal">
             <Col componentClass={ControlLabel} sm={2}>
               Titre
             </Col>
@@ -85,7 +85,7 @@ class CreateTalk extends Component {
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup controlId="formHorizontal">
             <Col componentClass={ControlLabel} sm={2}>
               Description
             </Col>
@@ -94,7 +94,7 @@ class CreateTalk extends Component {
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup controlId="formHorizontal">
             <Col componentClass={ControlLabel} sm={2}>
               Barcamp
             </Col>
@@ -105,7 +105,7 @@ class CreateTalk extends Component {
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup controlId="formHorizontal">
             <Col componentClass={ControlLabel} sm={2}>
               Speaker
             </Col>
@@ -116,13 +116,22 @@ class CreateTalk extends Component {
             </Col>
           </FormGroup>
 
+          <FormGroup controlId="formHorizontal">
+            <Col componentClass={ControlLabel} sm={2}>
+              Slides
+            </Col>
+            <Col sm={8}>
+              <FormControl onChange={(e) => this.handleFile(e)} type="file"/>
+            </Col>
+          </FormGroup>
+
           <FormGroup>
             <Col smOffset={2} sm={10}>
               <Button type="submit">Ajouter</Button>
             </Col>
           </FormGroup>
         </Form>
-        
+
       </div>
     )
   }

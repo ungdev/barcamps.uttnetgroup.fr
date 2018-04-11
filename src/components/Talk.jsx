@@ -24,8 +24,7 @@ class Talk extends Component {
       resolve(this.props.dispatch(filter(type,id)))});
     p1.then(() => {
       this.props.dispatch(apply(this.props.filter))})
-
-  }
+    }
 
   render() {
 
@@ -57,7 +56,6 @@ class Talk extends Component {
       </div>
     )
   }
-
 }
 
 function mapStateToProps(state) {

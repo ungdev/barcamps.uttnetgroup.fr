@@ -18,10 +18,7 @@ class EditBarcamp extends Component {
     barcamp.date = date;
     this.setState(barcamp);
   }
-
-  componentDidMount() {
-  }
-
+  
   componentWillReceiveProps(nextProps){
     this.updateState(nextProps.barcamp);
   }
@@ -48,12 +45,10 @@ class EditBarcamp extends Component {
     BarcampService.deleteID(this.props.token,this.state.id);
     this.props.dispatch(deleteBarcamp(this.state.id));
     this.props.dispatch(fetchTalks())
-
   }
 
   render() {
     return(
-
       <div className='Talk'>
         <h1> <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} /> </h1>
         <br/>

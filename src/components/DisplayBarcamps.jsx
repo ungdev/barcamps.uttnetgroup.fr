@@ -27,7 +27,6 @@ class DisplayBarcamps extends Component {
         </div>
     );
   }
-
 }
 
 function mapStateToProps(state) {

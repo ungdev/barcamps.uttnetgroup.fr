@@ -24,7 +24,8 @@ class Menu extends Component {
       oauth: "",
       barcamps: [],
       speakers: []
-    }
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,19 +42,27 @@ class Menu extends Component {
     }
   }
 
-  handleChange(type,event) {
-    var p1 = new Promise((resolve,reject) => {
-      resolve(this.props.dispatch(filter(type,event.target.value)))});
-    p1.then(() => {
-      this.props.dispatch(apply(this.props.filter))})
+  test(){
+    console.log('clic');
   }
 
-  fieldSelection(type,name) {
+  handleChange(type,value) {
+    if (value != undefined) {
+      console.log(type);
+      let p1 = new Promise((resolve,reject) => {
+        console.log(type);
+        resolve(this.props.dispatch(filter(type,value)))});
+      p1.then(() => {
+        this.props.dispatch(apply(this.props.filter))})
+    }
+  }
+
+  fieldSelection(type,name,varN) {
     return(
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>{name}</ControlLabel>
-        <FormControl componentClass="select" placeholder="select">
-          <option value="select"> </option>
+        <FormControl componentClass="select" placeholder="select" onClick={(e) => this.handleChange(varN,e.target.value)}>
+          <option value=""> </option>
           {type}
         </FormControl>
       </FormGroup>
@@ -61,7 +70,7 @@ class Menu extends Component {
   }
 
   getMenu() {
-    if (true) {
+    if (this.props.admin.admin) { // for testing replace with true
       return (
        <Dropdown.Menu>
           <MenuItem eventKey="1" onClick={() => {this.props.dispatch(create("talk"))}}>Ajouter Présentation</MenuItem>
@@ -113,13 +122,13 @@ class Menu extends Component {
         <Grid fluid className='Selection'>
           <Row>
             <Col xs={6} sm={4}>
-              {this.fieldSelection(barcamps,'Barcamps:')}
+              {this.fieldSelection(barcamps,'Barcamps:','barcamps')}
             </Col>
             <Col xs={6} sm={4}>
-              {this.fieldSelection(speakers,'Speakers:')}
+              {this.fieldSelection(speakers,'Speakers:','speakers')}
             </Col>
             <Col xs={6} sm={4}>
-              {this.fieldSelection(talks,'Présentations:')}
+              {this.fieldSelection(talks,'Présentations:','talks')}
             </Col>
           </Row>
         </Grid>
