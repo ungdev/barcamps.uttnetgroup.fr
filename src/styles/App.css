@@ -55,7 +55,7 @@ a:hover.DisplayAll {
 
 .Login {
   position: absolute;
-  right: 2em;
+  right: 11%;
 }
 
 .Selection {
@@ -75,5 +75,11 @@ hr {
 }
 
 .MenuBack {
-  background-color: #88C4F9
+  background-color: #88C4F9;
+}
+
+.editButton {
+  display: inline-block;
+  position: absolute;
+  right: 11%;
 }

@@ -9,7 +9,7 @@ import '../styles/App.css'
 class DisplayTalks extends Component {
 
   showTalks() {
-      if (this.props.admin.user.admin) {
+      if (this.props.admin.user.admin){//true) {
         return this.props.talks.map(e => <Col sm={12} md={6}>
           <EditTalk key={e.id} talk={e} />
         </Col>);

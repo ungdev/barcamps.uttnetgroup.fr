@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Col } from 'react-bootstrap'
 
 import TalkService from '../services/TalkService'
 import { deleteTalk } from '../actions'
@@ -87,17 +88,19 @@ class EditTalk extends Component {
   render() {
     return(<div className='Talk'>
         <h1> <input type='text' value={this.state.title} onChange={this.handleChange.bind(this,'title')} /> </h1>
-        <br/>
-        Barcamp: {this.getListBarcamps()}
-        <br/>
-        Speaker: {this.getListSpeakers()}
-        <br/>
-        Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
-        <br/>
-        Slides: <input type='file' onChange={this.handleFile.bind(this)}/>
-        <br/>
-        <button type='button' onClick={this.handleClick.bind(this)}>Modifier</button>
-        <button type ='button' onClick={this.handleDelete.bind(this)}>Supprimer</button>
+        <Col sm={8}>
+          Barcamp: {this.getListBarcamps()}
+          <br/>
+          Speaker: {this.getListSpeakers()}
+          <br/>
+          Description: <input type='form' value={this.state.description} onChange={this.handleChange.bind(this,'description')} />
+          <br/>
+          Sl: <input type='file' onChange={this.handleFile.bind(this)}/>
+        </Col>
+        <Col sm={2}>
+          <button type='button' onClick={this.handleClick.bind(this)}>Modifier</button>
+          <button type ='button' onClick={this.handleDelete.bind(this)}>Supprimer</button>
+        </Col>
       </div>
     )
   }
