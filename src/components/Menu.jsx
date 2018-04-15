@@ -79,7 +79,7 @@ class Menu extends Component {
             Ajouter Speaker
           </MenuItem>
           <MenuItem divider />
-          <MenuItem eventKey="4">Deconnexion</MenuItem>
+          <MenuItem eventKey="4" href="https://barcamps.uttnetgroup.fr">Deconnexion</MenuItem>
        </Dropdown.Menu>
       )
     } else {
