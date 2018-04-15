@@ -24,16 +24,31 @@ export function filter(type, ID){
   }
 }
 
-export function apply(filter){
+export function apply(filter,type){
   return function(dispatch) {
-    TalkService.get()
-      .then(talks => {
-        talks = talks.filter(t =>
-          t.barcamp_id.toString().match(filter[0]) && t.speaker_id.toString().match(filter[1]) && t.id.toString().match(filter[2]));
-        return talks;
+    BarcampService.get()
+      .then(barcamps => {
+        switch (type) {
+          case "barcamp":
+            barcamps = barcamps.filter(b => b.id === parseInt(filter[0]));
+            return barcamps
+          case "talk":
+            barcamps = barcamps.filter(b => b.talks_ids.includes(parseInt(filter[2])));
+            barcamps[0].talks = barcamps[0].talks.filter(t => t.id === parseInt(filter[2]));
+            return barcamps
+          case "speaker":
+            barcamps = barcamps.map(b => {
+              b.talks = b.talks.filter(t => t.speaker_id === parseInt(filter[1]));
+              return b
+            });
+            barcamps = barcamps.filter(b => b.talks[0]);
+            return barcamps
+          default:
+            return barcamps
+        }
       })
-      .then(talks => {
-        dispatch({type: "FETCH__TALKS", payload: talks})
+      .then(barcamps => {
+        dispatch({type: "FETCH__BARCAMPS", payload: barcamps})
       })
     }
 }
@@ -42,7 +57,7 @@ export function fetchTalks(){
   return function(dispatch) {
     TalkService.get()
         .then(talks => {
-          dispatch({type: "RESET_FILTER", payload: 1});
+          dispatch({type: "RESET_FILTER", payload: null});
           dispatch({type: "FETCH__TALKS", payload: talks})
       });
   }

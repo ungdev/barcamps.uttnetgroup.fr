@@ -13,7 +13,7 @@ import {
   Navbar} from 'react-bootstrap'
 
 import OauthService from '../services/OauthService'
-import { filter, apply, addUser, create } from '../actions'
+import { filter, apply, addUser, create, fetchBarcamps } from '../actions'
 import '../styles/App.css'
 
 class Menu extends Component {
@@ -47,13 +47,13 @@ class Menu extends Component {
   }
 
   handleChange(type,value) {
-    if (value != undefined) {
-      console.log(type);
+    if (value !== "") {
       let p1 = new Promise((resolve,reject) => {
-        console.log(type);
         resolve(this.props.dispatch(filter(type,value)))});
       p1.then(() => {
-        this.props.dispatch(apply(this.props.filter))})
+        this.props.dispatch(apply(this.props.filter,type))})
+    } else {
+      this.props.dispatch(fetchBarcamps())
     }
   }
 
@@ -70,7 +70,7 @@ class Menu extends Component {
   }
 
   getMenu() {
-    if (this.props.admin.admin) { // for testing replace with true
+    if (this.props.admin.user.admin) { // for testing replace with true
       return (
        <Dropdown.Menu>
           <MenuItem eventKey="1" onClick={() => {this.props.dispatch(create("talk"))}}>Ajouter Présentation</MenuItem>
@@ -122,13 +122,13 @@ class Menu extends Component {
         <Grid fluid className='Selection'>
           <Row>
             <Col xs={6} sm={4}>
-              {this.fieldSelection(barcamps,'Barcamps:','barcamps')}
+              {this.fieldSelection(barcamps,'Barcamps:','barcamp')}
             </Col>
             <Col xs={6} sm={4}>
-              {this.fieldSelection(speakers,'Speakers:','speakers')}
+              {this.fieldSelection(speakers,'Speakers:','speaker')}
             </Col>
             <Col xs={6} sm={4}>
-              {this.fieldSelection(talks,'Présentations:','talks')}
+              {this.fieldSelection(talks,'Présentations:','talk')}
             </Col>
           </Row>
         </Grid>
