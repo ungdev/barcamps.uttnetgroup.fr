@@ -18,7 +18,7 @@ class EditBarcamp extends Component {
     barcamp.date = date;
     this.setState(barcamp);
   }
-  
+
   componentWillReceiveProps(nextProps){
     this.updateState(nextProps.barcamp);
   }
@@ -31,10 +31,9 @@ class EditBarcamp extends Component {
       description: this.state.description,
       date: date
     };
-    console.log(content);
     BarcampService.putID(this.props.token,this.state.id,content);
     content = {...content, id: this.state.id};
-    this.props.dispatch(updateBarcamp(content))
+    this.props.dispatch(updateBarcamp(content));
   }
 
   handleChange(type,event){

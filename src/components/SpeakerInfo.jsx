@@ -9,7 +9,7 @@ class SpeakerInfo extends Component {
 
     return(
       <div>
-        Email: {this.props.speaker.email} <br/>
+        Email: <a href={`mailto:${this.props.speaker.email}`}>{this.props.speaker.email}</a> <br/>
         Liste des présentations:
           <ul>{listTalks}</ul>
       </div>

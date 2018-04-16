@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, FormGroup, Col, FormControl, ControlLabel, Button, FieldGroup} from 'react-bootstrap'
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button} from 'react-bootstrap'
 
 import { addTalk, create } from '../actions'
 import TalkService from '../services/TalkService.js';
