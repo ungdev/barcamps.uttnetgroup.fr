@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTalks, fetchBarcamps, fetchSpeakers } from '../actions';
+import { fetchTalks, fetchBarcamps, fetchSpeakers, getUser } from '../actions';
 import Menu from './Menu.jsx';
 import DisplayBarcamps from './DisplayBarcamps.jsx';
 import '../styles/App.css';
@@ -12,6 +12,7 @@ class App extends Component {
     this.props.dispatch(fetchTalks());
     this.props.dispatch(fetchBarcamps());
     this.props.dispatch(fetchSpeakers());
+    this.props.dispatch(getUser());
   }
 
 
@@ -27,8 +28,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-  };
-}
-export default connect(mapStateToProps)(App);
+export default connect()(App);
